@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Work_Start">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Added file system from last project">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MaketController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/MainMaket.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -110,7 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678389830768</updated>
       <workItem from="1678389831937" duration="1681000" />
-      <workItem from="1678400464827" duration="343000" />
+      <workItem from="1678400464827" duration="1999000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -126,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678390504741</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added file system from last project">
+      <created>1678400921714</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678400921714</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +186,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Work_Start" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work_Start" />
+    <MESSAGE value="Added file system from last project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added file system from last project" />
   </component>
 </project>
