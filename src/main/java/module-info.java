@@ -8,6 +8,7 @@ module com.example.database {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens com.example.database to javafx.fxml;
     exports com.example.database;
