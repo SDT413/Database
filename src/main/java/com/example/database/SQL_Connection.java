@@ -16,7 +16,7 @@ public class SQL_Connection {
             // Load the JDBC driver.
             Class.forName("org.sqlite.JDBC");
             // Connect to the database.
-            connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
             CreateRelationsTable();
             tablesSet = connection.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type='table'");
         } catch (ClassNotFoundException | SQLException e) {
