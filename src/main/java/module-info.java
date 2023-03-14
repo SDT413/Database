@@ -9,6 +9,7 @@ module com.example.database {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
     opens com.example.database to javafx.fxml;
     exports com.example.database;

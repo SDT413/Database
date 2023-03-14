@@ -4,13 +4,14 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.MainController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.MainController">
    <children>
-      <Button layoutY="2.0" mnemonicParsing="false" text="Нова Таблиця" />
-      <Button layoutX="94.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Видалити Таблицю" />
-      <Button layoutX="218.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Добавити Рядок" />
-      <Button layoutX="327.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" text="Добавити Стовпець" />
-      <TabPane layoutX="3.0" layoutY="27.0" prefHeight="374.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" />
+      <Button fx:id="addTableButton" layoutY="2.0" mnemonicParsing="false" onAction="#AddTable" text="Нова Таблиця" />
+      <Button fx:id="deleteTableButton" layoutX="94.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteTable" prefHeight="25.0" prefWidth="124.0" text="Видалити Таблицю" />
+      <Button fx:id="addRowButton" layoutX="484.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertRow" prefHeight="25.0" prefWidth="116.0" text="Добавити Рядок" />
+      <Button fx:id="addColumnButton" layoutX="220.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertColumn" prefHeight="25.0" prefWidth="133.0" text="Добавити Стовпець" />
+      <TabPane fx:id="tabPane" layoutX="3.0" layoutY="27.0" prefHeight="694.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" />
+      <Button layoutX="286.0" layoutY="-82.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="deleteColumnButton" layoutX="354.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="25.0" prefWidth="133.0" text="Вдалити стовпець" />
    </children>
 </AnchorPane>
