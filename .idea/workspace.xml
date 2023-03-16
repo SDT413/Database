@@ -4,17 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Start_Begins">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Added separition to panels">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Find_algorithm/Find_algorithm.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../find_alghorithm/find_alghorithm.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ResultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ResultPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ResultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ResaultPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/MainMaket.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +66,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.46666667&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -162,7 +163,9 @@
       <workItem from="1678743663985" duration="2058000" />
       <workItem from="1678753710625" duration="2122000" />
       <workItem from="1678792134650" duration="42000" />
-      <workItem from="1678821986513" duration="2355000" />
+      <workItem from="1678821986513" duration="6012000" />
+      <workItem from="1678910456445" duration="3155000" />
+      <workItem from="1678992180989" duration="12371000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -199,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678744979073</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added separition to panels">
+      <created>1678824670517</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678824670517</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,17 +250,14 @@
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="47040d5b-4aad-477e-987c-33ac05e70c1d" value="TOOL_WINDOW" />
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Work_Start" />
     <MESSAGE value="Added file system from last project" />
     <MESSAGE value="Added some more files" />
     <MESSAGE value="Start_Begins" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start_Begins" />
+    <MESSAGE value="Added separition to panles" />
+    <MESSAGE value="Added separition to panels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added separition to panels" />
   </component>
 </project>

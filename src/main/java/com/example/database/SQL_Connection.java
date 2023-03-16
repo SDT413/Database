@@ -1,5 +1,9 @@
 package com.example.database;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +13,6 @@ public class SQL_Connection {
     private String query;
     private Statement statement;
     private ResultSet resultSet;
-    private ResultSet tablesSet;
-
     public SQL_Connection() {
         try {
             // Load the JDBC driver.
@@ -18,7 +20,6 @@ public class SQL_Connection {
             // Connect to the database.
             connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
             CreateRelationsTable();
-            tablesSet = connection.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type='table'");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -58,9 +59,6 @@ public class SQL_Connection {
     }
     public ResultSet getResultSet() {
         return resultSet;
-    }
-    public ResultSet getTablesSet() throws SQLException {
-        return tablesSet;
     }
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
@@ -251,5 +249,61 @@ public String getJSON_Export(String tableName) throws SQLException {
     }
     public void close() throws SQLException {
         connection.close();
+    }
+    public void open() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
+    }
+
+    public void CreateTable(String Table_Name, String[] Column_Names) throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CREATE TABLE IF NOT EXISTS ").append(Table_Name).append(" (");
+        sb.append("id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+        for (int i = 0; i < Column_Names.length; i++) {
+            sb.append(Column_Names[i]).append(" varchar(255)");
+            if (i != Column_Names.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append(")");
+        SDUpdate(sb.toString());
+        System.out.println(sb.toString());
+    }
+    public void DropTable(String Table_Name) throws SQLException {
+        SDUpdate("DROP TABLE IF EXISTS " + Table_Name);
+    }
+
+    public void AddColumn(String tableName, String columnName) throws SQLException {
+        SDUpdate("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " varchar(255)");
+    }
+    public void RemoveColumn(String tableName, String columnName) throws SQLException {
+        SDUpdate("ALTER TABLE " + tableName + " DROP COLUMN " + columnName);
+    }
+
+    public void InsertRow(String tableName, String[] columnsNames, String[] data) throws SQLException {
+        if (data.length == 0) {
+            return;
+        }
+        if (columnsNames.length == 0) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO ").append(tableName).append(" (");
+        for (int i = 0; i < columnsNames.length; i++) {
+            sb.append(columnsNames[i]);
+            if (i != columnsNames.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append(") VALUES (");
+        StringBuilder values = new StringBuilder();
+        for (int i = 0; i < data.length; i++) {
+            if (i != 0) {
+                values.append(", ");
+            }
+            values.append("'[\"").append(data[i]).append("\"]'");
+        }
+        sb.append(values).append(")");
+        System.out.println(sb.toString());
+        SDUpdate(sb.toString());
     }
 }
