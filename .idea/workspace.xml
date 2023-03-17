@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Added separition to panels">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Finished with Buttons">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../Find_algorithm/Find_algorithm.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../find_alghorithm/find_alghorithm.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ResultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ResaultPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +163,8 @@
       <workItem from="1678821986513" duration="6012000" />
       <workItem from="1678910456445" duration="3155000" />
       <workItem from="1678992180989" duration="12371000" />
+      <workItem from="1679004595094" duration="42000" />
+      <workItem from="1679078161979" duration="6968000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -209,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678824670517</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Finished with Buttons">
+      <created>1679004629250</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679004629250</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +264,7 @@
     <MESSAGE value="Start_Begins" />
     <MESSAGE value="Added separition to panles" />
     <MESSAGE value="Added separition to panels" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added separition to panels" />
+    <MESSAGE value="Finished with Buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished with Buttons" />
   </component>
 </project>

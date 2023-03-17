@@ -7,8 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -88,6 +90,28 @@ public class MainController implements Initializable {
             });
         }
     }
+    public void AddMouseListener(TableView<TableObject> tableView){
+        tableView.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getClickCount() == 2) {
+                if (tableView.getSelectionModel().getSelectedItems().size() == 0) {
+                    return;
+                }
+                TableObject row = tableView.getSelectionModel().getSelectedItems().get(0);
+                System.out.println(row.getProperty(0).getValue());
+                int rowID = Integer.parseInt(row.getId());
+                int rowIndex = tableView.getSelectionModel().getSelectedIndex();
+                try {
+                    SummonRelations(new RelationsController(MainController.this,splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()), rowIndex, rowID));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+                }
+
+        );
+
+
+    }
 
     public void InitTable(String tableName) throws SQLException {
         ResultSet tableData = sql.CreateResultSet(sql.getUseableQuery(tableName));
@@ -106,6 +130,7 @@ public class MainController implements Initializable {
 
         tabPane.getTabs().add(tab);
         tableData.close();
+        AddMouseListener(tableView);
     }
     public SearchPanel InitSearchPanel(Label[] labels) {
         return new SearchPanel(labels);
@@ -146,9 +171,23 @@ public class MainController implements Initializable {
     }
     public void DeleteTable() throws SQLException {
         String tableName = tabPane.getSelectionModel().getSelectedItem().getText();
-        tabPane.getTabs().remove(tabPane.getSelectionModel().getSelectedItem());
-        splitPanels.remove(tabPane.getSelectionModel().getSelectedIndex());
-        sql.DropTable(tableName);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Видалення таблиці");
+        alert.setHeaderText("Видалити таблицю " + tableName + "?");
+        alert.setContentText("Ви впевнені?");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(tabPane.getScene().getWindow());
+        ButtonType buttonTypeOne = new ButtonType("Так");
+        ButtonType buttonTypeTwo = new ButtonType("Ні");
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            sql.DropTable(tableName);
+            tabPane.getTabs().remove(tabPane.getSelectionModel().getSelectedItem());
+            splitPanels.remove(tabPane.getSelectionModel().getSelectedIndex());
+        } else {
+            alert.close();
+        }
     }
 
     public void InsertRow() throws SQLException {
@@ -219,5 +258,13 @@ public class MainController implements Initializable {
             }
         });
 
+    }
+    public void SummonRelations(RelationsController relationsController) throws IOException {
+        FXMLLoader fxmlLoader =  new FXMLLoader(MainApplication.class.getResource("RelationsWindow.fxml"));
+        fxmlLoader.setController(relationsController);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

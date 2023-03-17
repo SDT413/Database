@@ -20,7 +20,6 @@ public class SearchPanel extends GridPane{
         }
 
     }
-
     private void add(String s,String s1, int i, int i1) {
         Label v = new Label(s + s1);
         super.add(v, i, i1);
@@ -34,6 +33,11 @@ public class SearchPanel extends GridPane{
     }
     public TextField[] getTextFields() {
         return textFields;
+    }
+    public void setTextFieldsText(String[] text) {
+        for (int i = 0; i < text.length; i++) {
+            textFields[i].setText(text[i]);
+        }
     }
     public String[] getColumnsNames() {
         String[] columnsNames = new String[labels.length];
