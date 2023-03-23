@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.skin.TableColumnHeader;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -36,6 +37,9 @@ public class AddTableController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        table.setEditable(true);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setPlaceholder(new javafx.scene.control.Label("Таблиця порожня"));
     }
     public void AddColumn() {
         if (columnName.getText().equals("")) {
@@ -46,6 +50,12 @@ public class AddTableController implements Initializable {
         column.setCellFactory(TextFieldTableCell.forTableColumn());
         column.setCellValueFactory(new PropertyValueFactory<>(columnName.getText()));
         table.getColumns().add(column);
+        columnName.setText("");
+        table.setOnMouseClicked(event -> {
+            if (event.getTarget() instanceof TableColumnHeader) {
+                columnName.setText(((TableColumnHeader) event.getTarget()).getTableColumn().getText());
+            }
+        });
     }
     public void DeleteColumn() {
       String column_name = columnName.getText();

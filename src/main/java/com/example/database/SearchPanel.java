@@ -57,4 +57,24 @@ public class SearchPanel extends GridPane{
         }
         return data;
     }
+
+    public void ClearData() {
+        for (int i = 0; i < labels.length; i++) {
+            textFields[i].setText("");
+        }
+    }
+
+    public SearchPanel CreateClone() {
+        Label[] labels = new Label[this.labels.length];
+        for (int i = 0; i < labels.length; i++) {
+            labels[i] = new Label(this.labels[i].getText());
+        }
+        return new SearchPanel(labels);
+    }
+
+    public void ClearTextFields() {
+        for (int i = 0; i < textFields.length; i++) {
+            textFields[i].setText("");
+        }
+    }
 }

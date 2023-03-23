@@ -13,6 +13,12 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        stage.setTitle("Особиста база даних");
+        stage.setResizable(true);
+        stage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
+
         stage.show();
     }
 

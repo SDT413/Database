@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     private Button deleteColumnButton;
     @FXML
     private Button addRowButton;
-    private ArrayList<SplitPanel> splitPanels = new ArrayList<>();
+    private static final ArrayList<SplitPanel> splitPanels = new ArrayList<>();
 
 
     @Override
@@ -45,27 +45,44 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    public static SplitPanel getElementByTableName(String tableName) {
+        for (SplitPanel splitPanel : splitPanels) {
+            if (splitPanel.getResaultPanel().getTableName().equals(tableName)) {
+                return splitPanel;
+            }
+        }
+        return null;
+    }
     public void ReloadMainPanel() throws Exception {
         tabPane.getTabs().clear();
         splitPanels.clear();
         start();
     }
+    public void ReloadMainPanel(int SelectedTab) throws Exception {
+        tabPane.getTabs().clear();
+        splitPanels.clear();
+        start();
+        tabPane.getSelectionModel().select(SelectedTab);
+    }
     public void doSearch(SplitPanel panel) throws SQLException {
         SearchPanel searchPanel = panel.getSearchPanel();
         ResaultPanel resaultPanel = panel.getResaultPanel();
         ResultSet rs = sql.Search(resaultPanel.getTableName(), searchPanel.getColumnsNames(), searchPanel.getData());
-        setTableRows(resaultPanel.getTable(), rs);
+        SetTableRows(resaultPanel.getTable(), rs);
     }
 
     public void SetTableColumns(TableView<TableObject> tableView, ResultSet tableData) throws SQLException {
         for (int i = 1; i <= tableData.getMetaData().getColumnCount(); i++) {
             TableColumn<TableObject, String> column = new TableColumn<>(tableData.getMetaData().getColumnName(i));
+            if (column.getText().contains("_")) {
+                column.setText(column.getText().replace("_", " "));
+            }
             int finalI = i;
             column.setCellValueFactory(cellData -> cellData.getValue().getProperty(finalI - 1));
             tableView.getColumns().add(column);
         }
     }
-    public void setTableRows(TableView<TableObject> tableView, ResultSet tableData) throws SQLException {
+    public void SetTableRows(TableView<TableObject> tableView, ResultSet tableData) throws SQLException {
         ObservableList<TableObject> data = FXCollections.observableArrayList();
         while (tableData.next()) {
             String[] row = new String[tableData.getMetaData().getColumnCount()-1];
@@ -109,8 +126,6 @@ public class MainController implements Initializable {
                 }
 
         );
-
-
     }
 
     public void InitTable(String tableName) throws SQLException {
@@ -123,6 +138,7 @@ public class MainController implements Initializable {
 
         SetTableColumns(tableView, tableData);
         SplitPanel splitPanel = new SplitPanel(InitSearchPanel(InitLabels(tableData.getMetaData().getColumnCount(), tableData)), InitResultPanel(tableView, tableName));
+        SetTableRows(tableView, sql.Search(tableName, splitPanel.getSearchPanel().getColumnsNames(), splitPanel.getSearchPanel().getData()));
         AddChangeListener(splitPanel);
 
         tab.setContent(splitPanel);
@@ -149,7 +165,7 @@ public class MainController implements Initializable {
     public void start() throws Exception {
        ResultSet tables = sql.SDQuery("SELECT name FROM sqlite_master WHERE type='table'");
         while (tables.next()) {
-            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationsTable")) {
+            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationsTable") || tables.getString(1).equals("RelationTable")) {
                 continue;
             }
             String tableName = tables.getString(1);
@@ -161,13 +177,13 @@ public class MainController implements Initializable {
     }
 
     public void AddTable() throws Exception {
+        int SelectedTab = tabPane.getSelectionModel().getSelectedIndex();
         FXMLLoader fxmlLoader =  new FXMLLoader(MainApplication.class.getResource("AddTableAskWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.showAndWait();
-        ReloadMainPanel();
-
+        ReloadMainPanel(SelectedTab);
     }
     public void DeleteTable() throws SQLException {
         String tableName = tabPane.getSelectionModel().getSelectedItem().getText();
@@ -193,19 +209,14 @@ public class MainController implements Initializable {
     public void InsertRow() throws SQLException {
         String tableName = tabPane.getSelectionModel().getSelectedItem().getText();
         SplitPanel panel = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex());
-        ResaultPanel resaultPanel = panel.getResaultPanel();
         SearchPanel searchPanel = panel.getSearchPanel();
         sql.InsertRow(tableName, searchPanel.getColumnsNames(), searchPanel.getData());
-        try {
-            doSearch(panel);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        searchPanel.ClearData();
     }
 
     public void InsertColumn() {
-       Dialog<String> dialog = new Dialog<>();
+        int SelectedTab = tabPane.getSelectionModel().getSelectedIndex();
+        Dialog<String> dialog = new Dialog<>();
          dialog.setTitle("Додати стовпець");
             dialog.setHeaderText("Введіть назву стовпця:");
             dialog.setContentText("Введіть назву стовпця:");
@@ -224,7 +235,7 @@ public class MainController implements Initializable {
             result.ifPresent(s -> {
                 try {
                     sql.AddColumn(tabPane.getSelectionModel().getSelectedItem().getText(), s);
-                    ReloadMainPanel();
+                    ReloadMainPanel(SelectedTab);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -233,6 +244,7 @@ public class MainController implements Initializable {
     }
 
     public void DeleteColumn() {
+        int SelectedTab = tabPane.getSelectionModel().getSelectedIndex();
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Видалення стовпця");
         dialog.setHeaderText("Введіть назву стовпця:");
@@ -252,7 +264,7 @@ public class MainController implements Initializable {
         result.ifPresent(s -> {
             try {
                 sql.RemoveColumn(tabPane.getSelectionModel().getSelectedItem().getText(), s);
-                ReloadMainPanel();
+                ReloadMainPanel(SelectedTab);
             } catch (Exception e) {
                 e.printStackTrace();
             }

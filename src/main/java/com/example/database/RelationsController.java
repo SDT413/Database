@@ -1,13 +1,20 @@
 package com.example.database;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RelationsController implements Initializable {
@@ -23,12 +30,13 @@ public class RelationsController implements Initializable {
     private ExtendedSearchPanel extendedSearchPanel;
     private ResaultPanel resaultPanel;
     SQL_Connection sql = MainController.sql;
+    private String tableName;
     public RelationsController(MainController mainController, SplitPanel splitPanel, int rowIndex, int rowId) {
         this.mainController = mainController;
         this.splitPanel = splitPanel;
         this.rowIndex = rowIndex;
         this.rowId = rowId;
-
+        tableName = splitPanel.getResaultPanel().getTableName();
     }
 
     @Override
@@ -40,13 +48,61 @@ public class RelationsController implements Initializable {
         }
     }
     public void start() throws SQLException {
-     extendedSearchPanel = new ExtendedSearchPanel(splitPanel.getSearchPanel().getLabels(),getChoicesContent());
-       resaultPanel = new ResaultPanel(new TableView<>(),"my_table2");
-        mainSplitPanel = new SplitPanel(extendedSearchPanel, resaultPanel);
+        extendedSearchPanel = new ExtendedSearchPanel(splitPanel.getSearchPanel().getLabels(),getChoicesContent());
+        TabResaultPanel tabResaultPanel = new TabResaultPanel(sql.getUseableTableNames());
+        mainSplitPanel = new SplitPanel(extendedSearchPanel, tabResaultPanel);
+        SetTablesColumns(tabResaultPanel);
+        SetTablesContent(tabResaultPanel);
         mainTab.setContent(mainSplitPanel);
         SetActionForVariants();
         SetActionForAddButtons();
         SetActionForDeleteButtons();
+        SetActionForAddRelationButton();
+        SetActionForDeleteRelationButton();
+
+    }
+    public void SetTablesColumns(TabResaultPanel tabResaultPanel) throws SQLException {
+        for (int i = 0; i < tabResaultPanel.getTables().length; i++) {
+            TableView<TableObject> tableView = tabResaultPanel.getTables()[i];
+            String[] columnsNames = sql.getUseableColumnsNames(tabResaultPanel.getTableNames()[i]);
+            System.out.println("Columns: "+Arrays.toString(columnsNames));
+            for (int j = 0; j < columnsNames.length; j++) {
+                TableColumn<TableObject, String> column = new TableColumn<>(columnsNames[j]);
+                column.setEditable(true);
+                int finalI = j;
+                column.setCellValueFactory(cellData -> cellData.getValue().getProperty(finalI));
+                tableView.getColumns().add(column);
+                System.out.println("Column: "+columnsNames[j]);
+            }
+            AddRelationColumn(tableView, columnsNames.length);
+        }
+
+    }
+    public void AddRelationColumn(TableView<TableObject> tableView, int index) {
+        TableColumn<TableObject, String> column = new TableColumn<>("Зв'язок");
+        column.setEditable(true);
+        column.setCellValueFactory(cellData -> cellData.getValue().getProperty(index));
+        tableView.getColumns().add(column);
+    }
+    public void AddTableContent(TableView<TableObject> table, ArrayList<RelationRow> rows) {
+        ObservableList<TableObject> data = FXCollections.observableArrayList();
+        for (int i = 0; i < rows.size(); i++) {
+            String[] values = new String[rows.get(i).getValues().length+1];
+            for (int j = 0; j < values.length-1; j++) {
+                values[j] = rows.get(i).getValues()[j];
+                System.out.println("Value: "+values[j]);
+            }
+            values[values.length-1] = rows.get(i).getRelation();
+            data.add(new TableObject(String.valueOf(rows.get(i).getId()),  values));
+            System.out.println(Arrays.toString(values));
+        }
+        table.setItems(data);
+    }
+    public void SetTablesContent(TabResaultPanel tabResaultPanel) throws SQLException {
+      for(int i = 0; i < tabResaultPanel.getTableNames().length; i++) {
+         ArrayList<RelationRow> rows = sql.getDataFromRelationTableFor(tableName, tabResaultPanel.getTableNames()[i], rowId);
+          AddTableContent(tabResaultPanel.getTables()[i], rows);
+      }
     }
     public String[][] getChoicesContent() throws SQLException {
         String[][] choicesContent = new String[splitPanel.getSearchPanel().getLabels().length][];
@@ -56,10 +112,12 @@ public class RelationsController implements Initializable {
 
         for (int i = 0; i < columnCount; i++) {
             String[] data = sql.SeparateJSONColumnToArray(tableName, columnsNames[i], rowId);
+            System.out.println("Data: "+Arrays.toString(data));
             choicesContent[i] = data;
         }
         return choicesContent;
     }
+
     public void SetActionForVariants() {
         for (int i = 0; i < extendedSearchPanel.getChoiceBoxes().length; i++) {
             int finalI = i;
@@ -93,6 +151,59 @@ public class RelationsController implements Initializable {
                 }
                 extendedSearchPanel.getChoiceBoxes()[finalI].getItems().remove(extendedSearchPanel.getTextFields()[finalI].getText());
                 extendedSearchPanel.getChoiceBoxes()[finalI].getSelectionModel().selectFirst();
+            });
+        }
+    }
+    public void SetActionForAddRelationButton() {
+        TabResaultPanel tabResaultPanel = mainSplitPanel.getTabResaultPanel();
+        for (int i = 0; i < tabResaultPanel.getAddReltionButtons().length; i++) {
+            int finalI = i;
+            tabResaultPanel.getAddReltionButtons()[i].setOnAction(e -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AddRelationWindow.fxml"));
+                    loader.setController(new AddRelationController(tableName,tabResaultPanel.getTableNames()[finalI],rowId));
+                    Scene scene = new Scene(loader.load());
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                    } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    SetTablesContent(tabResaultPanel);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        }
+    }
+    public void SetActionForDeleteRelationButton() {
+        TabResaultPanel tabResaultPanel = mainSplitPanel.getTabResaultPanel();
+        for (int i = 0; i < tabResaultPanel.getDeleteButtons().length; i++) {
+            int finalI = i;
+            tabResaultPanel.getDeleteButtons()[i].setOnAction(e -> {
+                Dialog<ButtonType> dialog = new Dialog<>();
+                dialog.setTitle("Видалення зв'язку");
+                dialog.setHeaderText("Ви впевнені, що хочете видалити зв'язок?");
+                ButtonType buttonTypeOk = new ButtonType("Так", ButtonBar.ButtonData.OK_DONE);
+                ButtonType buttonTypeCancel = new ButtonType("Ні", ButtonBar.ButtonData.CANCEL_CLOSE);
+                dialog.getDialogPane().getButtonTypes().addAll(buttonTypeOk, buttonTypeCancel);
+                Optional<ButtonType> result = dialog.showAndWait();
+                if (result.isPresent() && result.get().equals(buttonTypeOk)) {
+                    try {
+                        ObservableList<TableObject> data = tabResaultPanel.getTables()[finalI].getSelectionModel().getSelectedItems();
+                        for (int j = 0; j < data.size(); j++) {
+                            sql.DeleteRelation(tableName,  rowId, new RelationRow(tabResaultPanel.getSlectedTab().getText(),Integer.parseInt(data.get(j).getId()),data.get(j).getPropertyValue(data.get(j).getProperties().size() - 1)));
+                        }
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        SetTablesContent(tabResaultPanel);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
             });
         }
     }

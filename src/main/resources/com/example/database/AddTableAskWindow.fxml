@@ -7,28 +7,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.AddTableController">
    <children>
-      <Label alignment="CENTER" layoutX="-2.0" layoutY="14.0" prefHeight="54.0" prefWidth="600.0" text="Введiть названня таблицi:">
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="600.0" text="Введiть названня таблицi:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="TableNameField" layoutX="-2.0" layoutY="68.0" prefHeight="51.0" prefWidth="421.0">
+      <TextField fx:id="TableNameField" layoutX="-6.0" layoutY="54.0" prefHeight="51.0" prefWidth="491.0">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <TableView fx:id="table" editable="true" layoutY="152.0" prefHeight="248.0" prefWidth="600.0" />
-      <Button fx:id="add" layoutY="127.0" mnemonicParsing="false" onAction="#AddColumn" prefHeight="25.0" prefWidth="105.0" text="Додати колонку" />
-      <Button fx:id="delete" layoutX="105.0" layoutY="127.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="25.0" prefWidth="124.0" text="Видалити колонку" />
-      <TextField fx:id="columnName" layoutX="456.0" layoutY="127.0" prefHeight="25.0" prefWidth="142.0" />
-      <Label layoutX="332.0" layoutY="127.0" prefHeight="25.0" prefWidth="124.0" text="Названня колонки:">
+      <TableView fx:id="table" editable="true" layoutY="152.0" prefHeight="248.0" prefWidth="674.0" />
+      <Button fx:id="add" layoutX="-2.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddColumn" prefHeight="39.0" prefWidth="163.0" text="Додати колонку">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="delete" layoutX="157.0" layoutY="108.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="39.0" prefWidth="175.0" text="Видалити колонку">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextField fx:id="columnName" layoutX="499.0" layoutY="108.0" prefHeight="25.0" prefWidth="175.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label layoutX="332.0" layoutY="108.0" prefHeight="39.0" prefWidth="163.0" text="Названня колонки:">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="save" layoutX="431.0" layoutY="68.0" mnemonicParsing="false" onAction="#SaveTable" prefHeight="51.0" prefWidth="152.0" text="Додати таблицю" />
+      <Button fx:id="save" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#SaveTable" prefHeight="51.0" prefWidth="175.0" text="Додати таблицю">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>
