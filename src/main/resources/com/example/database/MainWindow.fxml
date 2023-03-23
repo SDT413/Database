@@ -11,7 +11,6 @@
       <Button fx:id="addRowButton" layoutX="548.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertRow" prefHeight="25.0" prefWidth="148.0" text="Добавити Рядок" />
       <Button fx:id="addColumnButton" layoutX="275.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertColumn" prefHeight="25.0" prefWidth="140.0" text="Добавити Стовпець" />
       <TabPane fx:id="tabPane" layoutX="3.0" layoutY="27.0" prefHeight="694.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" />
-      <Button layoutX="286.0" layoutY="-82.0" mnemonicParsing="false" text="Button" />
       <Button fx:id="deleteColumnButton" layoutX="415.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="25.0" prefWidth="133.0" text="Вдалити стовпець" />
    </children>
 </AnchorPane>
