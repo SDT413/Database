@@ -450,4 +450,14 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         SDUpdate(query);
         System.out.println(query);
     }
+
+    public void UpdateRelation(String tableName, int rowID,RelationRow relationRow) {
+        String query = "UPDATE RelationTable SET TableName = '" + tableName + "', id = " + rowID + ", RTableName = '" + relationRow.getTableName() + "', Rid = " + relationRow.getId() + ", Relation = '" + relationRow.getRelation() + "' WHERE TableName = '" + tableName + "' AND id = " + rowID + " AND RTableName = '" + relationRow.getTableName() + "' AND Rid = " + relationRow.getId();
+        System.out.println(query);
+        try {
+            SDUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+}

@@ -145,6 +145,15 @@ public class AddRelationController implements Initializable {
             if (!root_tableName.equals(tableName)) {
                 data.get(i).setReverse(new TextField());
             }
+            if (Integer.parseInt(data.get(i).getId()) == rowID) {
+              Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Помилка");
+                alert.setHeaderText("не можна додати елемент, що відноситься до себе");
+                alert.showAndWait();
+                data.remove(i);
+                i--;
+                continue;
+            }
             currentTableData.add(data.get(i));
         }
         table.setItems(currentTableData);

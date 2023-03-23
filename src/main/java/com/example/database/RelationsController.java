@@ -7,9 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.PortUnreachableException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,6 +61,9 @@ public class RelationsController implements Initializable {
         SetActionForDeleteButtons();
         SetActionForAddRelationButton();
         SetActionForDeleteRelationButton();
+        SetActionForSaveButtons();
+        SetActionForResetButtons();
+
 
     }
     public void SetTablesColumns(TabResaultPanel tabResaultPanel) throws SQLException {
@@ -74,26 +79,25 @@ public class RelationsController implements Initializable {
                 tableView.getColumns().add(column);
                 System.out.println("Column: "+columnsNames[j]);
             }
-            AddRelationColumn(tableView, columnsNames.length);
+            AddRelationColumn(tableView);
         }
 
     }
-    public void AddRelationColumn(TableView<TableObject> tableView, int index) {
-        TableColumn<TableObject, String> column = new TableColumn<>("Зв'язок");
-        column.setEditable(true);
-        column.setCellValueFactory(cellData -> cellData.getValue().getProperty(index));
-        tableView.getColumns().add(column);
+    public void AddRelationColumn(TableView<TableObject> table) {
+        TableColumn<TableObject, String> tableColumn = new TableColumn<>("Зв'язок");
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>("relation"));
+        table.getColumns().add(tableColumn);
     }
     public void AddTableContent(TableView<TableObject> table, ArrayList<RelationRow> rows) {
         ObservableList<TableObject> data = FXCollections.observableArrayList();
         for (int i = 0; i < rows.size(); i++) {
-            String[] values = new String[rows.get(i).getValues().length+1];
-            for (int j = 0; j < values.length-1; j++) {
+            String[] values = new String[rows.get(i).getValues().length];
+            for (int j = 0; j < values.length; j++) {
                 values[j] = rows.get(i).getValues()[j];
                 System.out.println("Value: "+values[j]);
             }
-            values[values.length-1] = rows.get(i).getRelation();
             data.add(new TableObject(String.valueOf(rows.get(i).getId()),  values));
+            data.get(i).setRelation(new TextField(rows.get(i).getRelation()));
             System.out.println(Arrays.toString(values));
         }
         table.setItems(data);
@@ -207,4 +211,30 @@ public class RelationsController implements Initializable {
             });
         }
     }
+    public void SetActionForSaveButtons() {
+        TabResaultPanel tabResaultPanel = mainSplitPanel.getTabResaultPanel();
+        for (int i = 0; i < tabResaultPanel.getSaveButtons().length; i++) {
+            int finalI = i;
+            tabResaultPanel.getSaveButtons()[i].setOnAction(e -> {
+                ObservableList<TableObject> data = tabResaultPanel.getTables()[finalI].getItems();
+                for (int j = 0; j < data.size(); j++) {
+                    sql.UpdateRelation(tableName, rowId, new RelationRow(tabResaultPanel.getSlectedTab().getText(), Integer.parseInt(data.get(j).getId()), data.get(j).getRelation().getText()));
+                }
+            });
+        }
+    }
+public void SetActionForResetButtons(){
+    TabResaultPanel tabResaultPanel = mainSplitPanel.getTabResaultPanel();
+    for (int i = 0; i < tabResaultPanel.getResetButtons().length; i++) {
+        int finalI = i;
+        tabResaultPanel.getResetButtons()[i].setOnAction(e -> {
+            try {
+                SetTablesContent(tabResaultPanel);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+    }
 }
+    }
+
