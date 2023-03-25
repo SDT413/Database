@@ -89,7 +89,13 @@ public class AddElemsController implements Initializable {
             }
             data.add(new TableObject(tableData.getString(1), row));
         }
+        SetCheckBoxes(data);
         tableView.setItems(data);
+    }
+    public void SetCheckBoxes(ObservableList<TableObject> data) {
+        for (int i = 0; i < data.size(); i++) {
+            data.get(i).setCheck(new CheckBox());
+        }
     }
 public void SetActionForAddButtons() {
         addSelected.setOnAction(actionEvent -> {

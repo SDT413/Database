@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Finished with relations table">
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Added 2 more buttons">
       <change afterPath="$PROJECT_DIR$/../Find_algorithm/Find_algorithm.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../find_alghorithm/find_alghorithm.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +187,10 @@
       <workItem from="1679566075053" duration="3000" />
       <workItem from="1679570220314" duration="9000" />
       <workItem from="1679589538215" duration="539000" />
+      <workItem from="1679602754010" duration="1403000" />
+      <workItem from="1679607484904" duration="827000" />
+      <workItem from="1679664359153" duration="138000" />
+      <workItem from="1679771358474" duration="9725000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -246,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679591364975</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added 2 more buttons">
+      <created>1679593785280</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679593785280</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +314,7 @@
     <MESSAGE value="Finished with Buttons" />
     <MESSAGE value="Top Of Relations Are complete" />
     <MESSAGE value="Finished with relations table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished with relations table" />
+    <MESSAGE value="Added 2 more buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 2 more buttons" />
   </component>
 </project>

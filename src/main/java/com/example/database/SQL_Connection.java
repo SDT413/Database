@@ -162,19 +162,24 @@ public class SQL_Connection {
         ResultSet resaultSet = CreateResultSet("SELECT "+ column +" FROM " + tableName + " WHERE id = " + rowID);
         ArrayList<String> data = new ArrayList<>();
         while (resaultSet.next()) {
-            String[] temp = resaultSet.getString(column).split(",");
-            for (int i = 0; i < temp.length; i++) {
-                if (temp[i].startsWith("[")) {
-                    temp[i] = temp[i].substring(1);
-                }
-                if (temp[i].endsWith("]")) {
-                    temp[i] = temp[i].substring(0, temp[i].length() - 1);
-                }
-                if (temp[i].contains("\"")) {
-                    temp[i] = temp[i].replace("\"", "");
-                }
+          if (Objects.isNull(resaultSet.getString(column))) {
+                return new String[]{"Немає даних"};
             }
-            data.addAll(Arrays.asList(temp));
+            else {
+                String[] temp = resaultSet.getString(column).split(",");
+                for (int i = 0; i < temp.length; i++) {
+                    if (temp[i].startsWith("[")) {
+                        temp[i] = temp[i].substring(1);
+                    }
+                    if (temp[i].endsWith("]")) {
+                        temp[i] = temp[i].substring(0, temp[i].length() - 1);
+                    }
+                    if (temp[i].contains("\"")) {
+                        temp[i] = temp[i].replace("\"", "");
+                    }
+                }
+                data.addAll(Arrays.asList(temp));
+            }
         }
         String[] result = new String[data.size()];
         for (int i = 0; i < data.size(); i++) {
@@ -372,11 +377,6 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
                 rdata.get(rdata.size() - 1).setValues(values);
             }
         }
-        for (RelationRow relationRow : rdata
-             ) {
-            System.out.println(relationRow.print());
-
-        }
         return rdata;
     }
     public ArrayList<RelationRow> getDataFromRelationsTableFor(String tableName, String RelatedTableName, int rowId) throws SQLException {
@@ -392,11 +392,6 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
                 }
                 rdata.get(rdata.size() - 1).setValues(values);
             }
-        }
-        for (RelationRow relationRow : rdata
-        ) {
-            System.out.println(relationRow.print());
-
         }
         return rdata;
     }
@@ -415,11 +410,6 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
                 rdata.get(rdata.size() - 1).setValues(values);
             }
         }
-        for (RelationRow relationRow : rdata
-        ) {
-            System.out.println(relationRow.print());
-
-        }
         return rdata;
     }
     public ArrayList<RelationRow> getDataFromRelationTableFor(String tableName, String RelatedTableName, int rowId) throws SQLException {
@@ -436,11 +426,6 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
                 rdata.get(rdata.size() - 1).setValues(values);
             }
         }
-        for (RelationRow relationRow : rdata
-        ) {
-            System.out.println(relationRow.print());
-
-        }
         return rdata;
     }
 
@@ -448,16 +433,24 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
     public void addRelation(String rootTableName, int rowID, RelationRow relationRow) throws SQLException {
         String query = "INSERT INTO RelationTable (TableName, id, RTableName, Rid, Relation) VALUES ('" + rootTableName + "', " + rowID + ", '" + relationRow.getTableName() + "', " + relationRow.getId() + ", '" + relationRow.getRelation() + "')";
         SDUpdate(query);
-        System.out.println(query);
     }
 
     public void UpdateRelation(String tableName, int rowID,RelationRow relationRow) {
         String query = "UPDATE RelationTable SET TableName = '" + tableName + "', id = " + rowID + ", RTableName = '" + relationRow.getTableName() + "', Rid = " + relationRow.getId() + ", Relation = '" + relationRow.getRelation() + "' WHERE TableName = '" + tableName + "' AND id = " + rowID + " AND RTableName = '" + relationRow.getTableName() + "' AND Rid = " + relationRow.getId();
-        System.out.println(query);
         try {
             SDUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateInfo(String tableName, int rowId, String text) throws SQLException {
+        String query = "UPDATE " + tableName + " SET info = '" + text + "' WHERE id = " + rowId;
+        SDUpdate(query);
+    }
+
+    public String getInfo(String tableName, int rowId) throws SQLException {
+        String query = "SELECT info FROM " + tableName + " WHERE id = " + rowId;
+            return SDQuery(query).getString("info");
     }
 }

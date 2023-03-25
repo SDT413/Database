@@ -118,7 +118,7 @@ public class MainController implements Initializable {
                 int rowID = Integer.parseInt(row.getId());
                 int rowIndex = tableView.getSelectionModel().getSelectedIndex();
                 try {
-                    SummonRelations(new RelationsController(MainController.this,splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()), rowIndex, rowID));
+                    SummonRelations(new RelationsController(splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()), rowID));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -276,7 +276,16 @@ public class MainController implements Initializable {
         fxmlLoader.setController(relationsController);
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
+        stage.setOnCloseRequest(event -> {
+            try {
+               sql.close();
+                sql.open();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         stage.setScene(scene);
         stage.showAndWait();
     }
+
 }

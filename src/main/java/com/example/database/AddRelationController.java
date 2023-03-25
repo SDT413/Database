@@ -37,6 +37,8 @@ public class AddRelationController implements Initializable {
     @FXML
     private TextField RelsName;
     SQL_Connection sql = MainController.sql;
+    ArrayList<TextField> relationTextFields = new ArrayList<>();
+    ArrayList<TextField> reverseRelationTextFields = new ArrayList<>();
     public AddRelationController(String root_tableName,String tableName, int rowID) {
         this.root_tableName = root_tableName;
         this.tableName = tableName;
@@ -126,6 +128,7 @@ public class AddRelationController implements Initializable {
          AddRelationColumn();
          if (!root_tableName.equals(tableName)){
              AddReverseRelationColumn();
+             AddCheckColumn();
          }
     }
     public void AddRelationColumn()  {
@@ -138,14 +141,44 @@ public class AddRelationController implements Initializable {
         tableColumn.setCellValueFactory(new PropertyValueFactory<>("reverse"));
         table.getColumns().add(tableColumn);
     }
+    public void AddCheckColumn() {
+        TableColumn<TableObject, String> checkColumn = new TableColumn<>("двійний зв'язок");
+        checkColumn.setCellValueFactory(new PropertyValueFactory<>("check"));
+        table.getColumns().add(checkColumn);
+    }
+    public void setActionForCheckBoxes() {
+        for (int i = 0; i < table.getItems().size(); i++) {
+            int finalI = i;
+            table.getItems().get(i).getCheck().setOnAction(event -> {
+                if (table.getItems().get(finalI).getCheck().isSelected()) {
+                   SetActionForRelationTextField();
+                    table.getItems().get(finalI).getReverse().setDisable(true);
+                } else {
+                    table.getItems().get(finalI).getReverse().setDisable(false);
+                }
+            });
+        }
+    }
+    public void SetActionForRelationTextField() {
+        for (int i = 0; i < relationTextFields.size(); i++) {
+            int finalI = i;
+            relationTextFields.get(i).textProperty().addListener((observable, oldValue, newValue) -> {
+                if (table.getItems().get(finalI).getCheck().isSelected()) {
+                    table.getItems().get(finalI).getReverse().setText(newValue);
+                }
+            });
+        }
+    }
     public void AddTableRows(ObservableList<TableObject> data) {
         ObservableList<TableObject> currentTableData = table.getItems();
         for (int i = 0; i < data.size(); i++) {
-            data.get(i).setRelation(new TextField());
+            relationTextFields.add(new TextField());
+            data.get(i).setRelation(relationTextFields.get(i));
             if (!root_tableName.equals(tableName)) {
                 data.get(i).setReverse(new TextField());
+                data.get(i).setCheck(new CheckBox());
             }
-            if (Integer.parseInt(data.get(i).getId()) == rowID) {
+            if (Integer.parseInt(data.get(i).getId()) == rowID && root_tableName.equals(tableName)) {
               Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Помилка");
                 alert.setHeaderText("не можна додати елемент, що відноситься до себе");
@@ -157,6 +190,9 @@ public class AddRelationController implements Initializable {
             currentTableData.add(data.get(i));
         }
         table.setItems(currentTableData);
+        if (!root_tableName.equals(tableName)) {
+            setActionForCheckBoxes();
+        }
     }
     public void setActionForAddButton() {
         add.setOnAction(event -> {
@@ -166,6 +202,14 @@ public class AddRelationController implements Initializable {
                 loader.setController(addElemsController);
                 Scene scene = new Scene(loader.load());
                 Stage stage = new Stage();
+                stage.setOnCloseRequest(event1 -> {
+                    try {
+                        sql.close();
+                        sql.open();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                });
                 stage.setScene(scene);
                 stage.showAndWait();
                 AddTableRows(addElemsController.data);

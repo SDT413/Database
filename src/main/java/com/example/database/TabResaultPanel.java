@@ -39,7 +39,7 @@ public class TabResaultPanel extends TabPane{
             tableViews[i].setEditable(true);
             tableViews[i].setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tableViews[i].setPlaceholder(new javafx.scene.control.Label("Таблиця порожня"));
-            tableViews[i].setPrefWidth(600);
+            tableViews[i].setPrefWidth(1280);
             gridPanes[i].add(tableViews[i], 0, 1, 4, 1);
             tabs[i] = new Tab(tableNames[i], gridPanes[i]);
             this.getTabs().add(tabs[i]);

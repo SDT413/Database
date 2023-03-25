@@ -10,8 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
-import java.net.PortUnreachableException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,24 +19,29 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
 public class RelationsController implements Initializable {
-    private MainController mainController;
-    private SplitPanel splitPanel;
-    private int rowIndex;
-    private int rowId;
+    private final SplitPanel splitPanel;
+    private final int rowId;
     @FXML
     private TabPane tabPane;
     @FXML
     private Tab mainTab;
+    @FXML
+    private Tab infoTab;
+    @FXML
+    private TextArea infoArea;
+    @FXML
+    private Button infoSaveButton;
+    @FXML
+    private Button infoResetButton;
     private SplitPanel mainSplitPanel;
     private ExtendedSearchPanel extendedSearchPanel;
     private ResaultPanel resaultPanel;
     SQL_Connection sql = MainController.sql;
-    private String tableName;
-    public RelationsController(MainController mainController, SplitPanel splitPanel, int rowIndex, int rowId) {
-        this.mainController = mainController;
+    private final String tableName;
+    public RelationsController(SplitPanel splitPanel, int rowId) {
         this.splitPanel = splitPanel;
-        this.rowIndex = rowIndex;
         this.rowId = rowId;
         tableName = splitPanel.getResaultPanel().getTableName();
     }
@@ -50,6 +55,12 @@ public class RelationsController implements Initializable {
         }
     }
     public void start() throws SQLException {
+       SetMainTab();
+       SetInfoTab();
+    }
+
+
+    public void SetMainTab() throws SQLException {
         extendedSearchPanel = new ExtendedSearchPanel(splitPanel.getSearchPanel().getLabels(),getChoicesContent());
         TabResaultPanel tabResaultPanel = new TabResaultPanel(sql.getUseableTableNames());
         mainSplitPanel = new SplitPanel(extendedSearchPanel, tabResaultPanel);
@@ -63,9 +74,25 @@ public class RelationsController implements Initializable {
         SetActionForDeleteRelationButton();
         SetActionForSaveButtons();
         SetActionForResetButtons();
-
-
     }
+    private void SetInfoTab() throws SQLException {
+      infoArea.setText(sql.getInfo(tableName, rowId));
+        infoSaveButton.setOnAction(actionEvent -> {
+            try {
+                sql.updateInfo(tableName, rowId, infoArea.getText());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        infoResetButton.setOnAction(actionEvent -> {
+            try {
+                infoArea.setText(sql.getInfo(tableName, rowId));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     public void SetTablesColumns(TabResaultPanel tabResaultPanel) throws SQLException {
         for (int i = 0; i < tabResaultPanel.getTables().length; i++) {
             TableView<TableObject> tableView = tabResaultPanel.getTables()[i];
@@ -168,6 +195,14 @@ public class RelationsController implements Initializable {
                     loader.setController(new AddRelationController(tableName,tabResaultPanel.getTableNames()[finalI],rowId));
                     Scene scene = new Scene(loader.load());
                     Stage stage = new Stage();
+                    stage.setOnCloseRequest(event -> {
+                        try {
+                            sql.close();
+                            sql.open();
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
+                    });
                     stage.setScene(scene);
                     stage.showAndWait();
                     } catch (IOException ex) {
@@ -226,7 +261,6 @@ public class RelationsController implements Initializable {
 public void SetActionForResetButtons(){
     TabResaultPanel tabResaultPanel = mainSplitPanel.getTabResaultPanel();
     for (int i = 0; i < tabResaultPanel.getResetButtons().length; i++) {
-        int finalI = i;
         tabResaultPanel.getResetButtons()[i].setOnAction(e -> {
             try {
                 SetTablesContent(tabResaultPanel);
