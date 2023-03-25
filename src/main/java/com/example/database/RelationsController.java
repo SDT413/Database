@@ -232,7 +232,7 @@ public class RelationsController implements Initializable {
                     try {
                         ObservableList<TableObject> data = tabResaultPanel.getTables()[finalI].getSelectionModel().getSelectedItems();
                         for (int j = 0; j < data.size(); j++) {
-                            sql.DeleteRelation(tableName,  rowId, new RelationRow(tabResaultPanel.getSlectedTab().getText(),Integer.parseInt(data.get(j).getId()),data.get(j).getPropertyValue(data.get(j).getProperties().size() - 1)));
+                            sql.DeleteRelation(tableName,  rowId, new RelationRow(tabResaultPanel.getSlectedTab().getText(),Integer.parseInt(data.get(j).getId()),data.get(j).getRelation().getText()));
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);

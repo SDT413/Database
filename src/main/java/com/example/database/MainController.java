@@ -165,7 +165,7 @@ public class MainController implements Initializable {
     public void start() throws Exception {
        ResultSet tables = sql.SDQuery("SELECT name FROM sqlite_master WHERE type='table'");
         while (tables.next()) {
-            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationsTable") || tables.getString(1).equals("RelationTable")) {
+            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationTable")) {
                 continue;
             }
             String tableName = tables.getString(1);

@@ -20,20 +20,14 @@ public class SQL_Connection {
             Class.forName("org.sqlite.JDBC");
             // Connect to the database.
             connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
-            CreateRelationsTable();
             CreateRelationTable();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
     }
-    public void CreateRelationsTable() throws SQLException {
-        if (!Arrays.asList(getTableNames()).contains("RelationsTable")) {
-            SDUpdate("CREATE TABLE RelationsTable (id INTEGER, TableName varchar(255), Rid INTEGER, RTableName varchar(255), Relation varchar(255), AddRelations varchar(255))");
-        }
-    }
     public void CreateRelationTable() throws SQLException {
-        if (!Arrays.asList(getTableNames()).contains("RelationsTable")) {
+        if (!Arrays.asList(getTableNames()).contains("RelationTable")) {
             SDUpdate("CREATE TABLE RelationTable (id INTEGER, TableName varchar(255), Rid INTEGER, RTableName varchar(255), Relation varchar(255)");
         }
     }
@@ -362,38 +356,6 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         sb.append(values).append(")");
         System.out.println(sb.toString());
         SDUpdate(sb.toString());
-    }
-    public ArrayList<RelationRow> getDataFromRelationsTable(String tableName, int rowId) throws SQLException {
-        ResultSet resultSet = SDQuery("SELECT * FROM RelationsTable WHERE TableName = '" + tableName + "'"+ " AND id = " + rowId);
-        ArrayList<RelationRow> rdata = new ArrayList<>();
-        while (resultSet.next()) {
-            rdata.add(new RelationRow(resultSet.getString("RTableName"), resultSet.getInt("Rid"), resultSet.getString("Relation")));
-            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName"))+" id = " + resultSet.getInt("Rid"));
-            while (rs.next()) {
-               String[] values = new String[rs.getMetaData().getColumnCount() - 1];
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
-                    values[i - 1] = rs.getString(i + 1);
-                }
-                rdata.get(rdata.size() - 1).setValues(values);
-            }
-        }
-        return rdata;
-    }
-    public ArrayList<RelationRow> getDataFromRelationsTableFor(String tableName, String RelatedTableName, int rowId) throws SQLException {
-        ResultSet resultSet = SDQuery("SELECT * FROM RelationsTable WHERE TableName = '" + tableName + "'"+ " AND id = " + rowId + " AND RTableName = '" + RelatedTableName + "'");
-        ArrayList<RelationRow> rdata = new ArrayList<>();
-        while (resultSet.next()) {
-            rdata.add(new RelationRow(resultSet.getString("RTableName"), resultSet.getInt("Rid"), resultSet.getString("Relation")));
-            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName"))+" id = " + resultSet.getInt("Rid"));
-            while (rs.next()) {
-                String[] values = new String[rs.getMetaData().getColumnCount() - 1];
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
-                    values[i - 1] = rs.getString(i + 1);
-                }
-                rdata.get(rdata.size() - 1).setValues(values);
-            }
-        }
-        return rdata;
     }
     /////////////////////////////////////////////////////
     public ArrayList<RelationRow> getDataFromRelationTable(String tableName, int rowId) throws SQLException {

@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Added 2 more buttons">
-      <change afterPath="$PROJECT_DIR$/../Find_algorithm/Find_algorithm.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../find_alghorithm/find_alghorithm.iml" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Did some work on mistakes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TableObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +182,7 @@
       <workItem from="1679602754010" duration="1403000" />
       <workItem from="1679607484904" duration="827000" />
       <workItem from="1679664359153" duration="138000" />
-      <workItem from="1679771358474" duration="9725000" />
+      <workItem from="1679771358474" duration="10394000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -262,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679593785280</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Did some work on mistakes">
+      <created>1679781399157</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679781399157</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,6 +314,7 @@
     <MESSAGE value="Top Of Relations Are complete" />
     <MESSAGE value="Finished with relations table" />
     <MESSAGE value="Added 2 more buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added 2 more buttons" />
+    <MESSAGE value="Did some work on mistakes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Did some work on mistakes" />
   </component>
 </project>
