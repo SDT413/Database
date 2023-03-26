@@ -1,7 +1,10 @@
 package com.example.database;
 
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 public class TabResaultPanel extends TabPane{
     private String[] tableNames;
@@ -32,6 +35,12 @@ public class TabResaultPanel extends TabPane{
             gridPanes[i].setHgap(10);
             gridPanes[i].setVgap(10);
             gridPanes[i].setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+            ColumnConstraints col1 = new ColumnConstraints();
+            col1.setHgrow(Priority.ALWAYS);
+            gridPanes[i].getColumnConstraints().add(col1);
+            RowConstraints row1 = new RowConstraints();
+            row1.setVgrow(Priority.ALWAYS);
+            gridPanes[i].getRowConstraints().add(row1);
             gridPanes[i].add(updateButton[i], 0, 0);
             gridPanes[i].add(deleteButton[i], 1, 0);
             gridPanes[i].add(SaveButton[i], 2, 0);
@@ -39,13 +48,17 @@ public class TabResaultPanel extends TabPane{
             tableViews[i].setEditable(true);
             tableViews[i].setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tableViews[i].setPlaceholder(new javafx.scene.control.Label("Таблиця порожня"));
-            tableViews[i].setPrefWidth(1280);
+            tableViews[i].setPrefSize(MainApplication.width, MainApplication.height);
             gridPanes[i].add(tableViews[i], 0, 1, 4, 1);
             tabs[i] = new Tab(tableNames[i], gridPanes[i]);
             this.getTabs().add(tabs[i]);
         }
         this.getSelectionModel().selectFirst();
         this.setTabClosingPolicy(javafx.scene.control.TabPane.TabClosingPolicy.UNAVAILABLE);
+        this.setPrefSize(MainApplication.width, MainApplication.height);
+    }
+    public GridPane[] getGridPanes() {
+        return gridPanes;
     }
     public TableView<TableObject>[] getTables() {
         return tableViews;
@@ -101,6 +114,10 @@ public class TabResaultPanel extends TabPane{
     }
     public Button[] getResetButtons() {
         return ResetButton;
+    }
+
+    public String getTabName() {
+        return this.getSelectionModel().getSelectedItem().getText();
     }
 }
 

@@ -3,6 +3,9 @@ package com.example.database;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 public class ExtendedSearchPanel extends SearchPanel{
     Button[] addValueButton;
@@ -20,17 +23,12 @@ public class ExtendedSearchPanel extends SearchPanel{
                 choiceBox[i].getItems().add(s);
             }
             choiceBox[i].getSelectionModel().selectFirst();
-            addValueButton[i] = new Button("Додати до списку");
-            deleteValueButton[i] = new Button("Видалити зі списку");
+            addValueButton[i] = new Button("Додати");
+            deleteValueButton[i] = new Button("Видалити");
             this.add(addValueButton[i], 2, i);
             this.add(deleteValueButton[i], 3, i);
             this.add(choiceBox[i], 4, i);
         }
-        String[] text = new String[choiceBox.length];
-        for (int i = 0; i < choiceBox.length; i++) {
-            text[i] = choiceBox[i].getValue();
-        }
-        super.setTextFieldsText(text);
     }
     public ChoiceBox<String>[] getChoiceBoxes() {
         return choiceBox;

@@ -14,10 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+
 
 
 public class MainController implements Initializable {
@@ -34,9 +32,9 @@ public class MainController implements Initializable {
     private Button deleteColumnButton;
     @FXML
     private Button addRowButton;
+    @FXML
+    private Button deleteRowButton;
     private static final ArrayList<SplitPanel> splitPanels = new ArrayList<>();
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -53,14 +51,24 @@ public class MainController implements Initializable {
         }
         return null;
     }
+    public static SplitPanel getElementByTabName(String tabName) {
+        for (SplitPanel splitPanel : splitPanels) {
+            if (splitPanel.getTabResaultPanel().getTabName().equals(tabName)) {
+                return splitPanel;
+            }
+        }
+        return null;
+    }
     public void ReloadMainPanel() throws Exception {
         tabPane.getTabs().clear();
         splitPanels.clear();
+        tabPane.setPrefSize(MainApplication.width, MainApplication.height);
         start();
     }
     public void ReloadMainPanel(int SelectedTab) throws Exception {
         tabPane.getTabs().clear();
         splitPanels.clear();
+        tabPane.setPrefSize(MainApplication.width, MainApplication.height);
         start();
         tabPane.getSelectionModel().select(SelectedTab);
     }
@@ -116,7 +124,6 @@ public class MainController implements Initializable {
                 TableObject row = tableView.getSelectionModel().getSelectedItems().get(0);
                 System.out.println(row.getProperty(0).getValue());
                 int rowID = Integer.parseInt(row.getId());
-                int rowIndex = tableView.getSelectionModel().getSelectedIndex();
                 try {
                     SummonRelations(new RelationsController(splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()), rowID));
                 } catch (IOException e) {
@@ -126,6 +133,22 @@ public class MainController implements Initializable {
                 }
 
         );
+    }
+    public void SummonRelations(RelationsController relationsController) throws IOException {
+        FXMLLoader fxmlLoader =  new FXMLLoader(MainApplication.class.getResource("RelationsWindow.fxml"));
+        fxmlLoader.setController(relationsController);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setOnCloseRequest(event -> {
+            try {
+                sql.close();
+                sql.open();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     public void InitTable(String tableName) throws SQLException {
@@ -269,23 +292,13 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+    public void DeleteRow() throws SQLException {
+        String tableName = tabPane.getSelectionModel().getSelectedItem().getText();
+        TableObject tableObject = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getSelectionModel().getSelectedItem();
+        sql.DeleteRow(tableName, Integer.parseInt(tableObject.getId()));
+        splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getItems().remove(tableObject);
+    }
 
-    }
-    public void SummonRelations(RelationsController relationsController) throws IOException {
-        FXMLLoader fxmlLoader =  new FXMLLoader(MainApplication.class.getResource("RelationsWindow.fxml"));
-        fxmlLoader.setController(relationsController);
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setOnCloseRequest(event -> {
-            try {
-               sql.close();
-                sql.open();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        stage.setScene(scene);
-        stage.showAndWait();
-    }
 
 }

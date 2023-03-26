@@ -40,6 +40,7 @@ public class AddTableController implements Initializable {
         table.setEditable(true);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new javafx.scene.control.Label("Таблиця порожня"));
+        columnName.setPromptText("Назва колонки");
     }
     public void AddColumn() {
         if (columnName.getText().equals("")) {

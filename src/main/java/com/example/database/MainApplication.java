@@ -8,17 +8,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApplication extends Application {
+    static int width = 1280;
+    static int height = 720;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.widthProperty().addListener((observable, oldValue, newValue) -> {
+            width = newValue.intValue();
+        });
+        scene.heightProperty().addListener((observable, oldValue, newValue) -> {
+            height = newValue.intValue();
+        });
         stage.setScene(scene);
         stage.setTitle("Особиста база даних");
         stage.setResizable(true);
         stage.setOnCloseRequest(event -> {
             System.exit(0);
         });
-
         stage.show();
     }
 

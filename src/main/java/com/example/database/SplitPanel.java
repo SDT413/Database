@@ -5,12 +5,15 @@ public class SplitPanel extends javafx.scene.control.SplitPane {
     ResaultPanel resultPanel;
     TabResaultPanel tabResaultPanel;
 
+
     public SplitPanel(SearchPanel searchPanel, ResaultPanel resultPanel) {
         this.searchPanel = searchPanel;
         this.resultPanel = resultPanel;
         this.getItems().add(searchPanel.getGridPane());
         this.getItems().add(resultPanel.getTable());
         this.setOrientation(javafx.geometry.Orientation.VERTICAL);
+        this.setPrefWidth(MainApplication.width);
+        this.setPrefHeight(MainApplication.height);
     }
     public SplitPanel(SearchPanel searchPanel, TabResaultPanel tabResaultPanel) {
         this.searchPanel = searchPanel;
@@ -18,6 +21,8 @@ public class SplitPanel extends javafx.scene.control.SplitPane {
         this.getItems().add(searchPanel.getGridPane());
         this.getItems().add(tabResaultPanel);
         this.setOrientation(javafx.geometry.Orientation.VERTICAL);
+        this.setPrefWidth(MainApplication.width);
+        this.setPrefHeight(MainApplication.height);
     }
     public SplitPanel CreateClone() {
         return new SplitPanel(searchPanel.CreateClone(), resultPanel.CreateClone());

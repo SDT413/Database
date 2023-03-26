@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.AddTableController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@AddTableAsk.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.AddTableController">
    <children>
-      <Label alignment="CENTER" prefHeight="54.0" prefWidth="600.0" text="Введiть названня таблицi:">
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="674.0" text="Введiть названня таблицi:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="TableNameField" layoutX="-6.0" layoutY="54.0" prefHeight="51.0" prefWidth="491.0">
+      <TextField fx:id="TableNameField" layoutX="-6.0" layoutY="54.0" prefHeight="51.0" prefWidth="507.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="173.0">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <TableView fx:id="table" editable="true" layoutY="152.0" prefHeight="248.0" prefWidth="674.0" />
+      <TableView fx:id="table" editable="true" layoutY="152.0" prefHeight="248.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="152.0" />
       <Button fx:id="add" layoutX="-2.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddColumn" prefHeight="39.0" prefWidth="163.0" text="Додати колонку">
          <font>
             <Font size="18.0" />
@@ -37,7 +37,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="save" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#SaveTable" prefHeight="51.0" prefWidth="175.0" text="Додати таблицю">
+      <Button fx:id="save" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#SaveTable" prefHeight="51.0" prefWidth="175.0" text="Додати таблицю" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="18.0" />
          </font></Button>

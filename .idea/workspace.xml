@@ -5,10 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Did some work on mistakes">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElems.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAsk.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Relations.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SplitPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElemsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElemsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelationWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelationWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/RelationsWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +40,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -52,6 +70,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/sqllite/sqlite-jdbc-3.40.1.0.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -76,9 +95,9 @@
       <recent name="C:\Repositories\Fathers_Database\Database" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Repositories\Fathers_Database\Database\src" />
-      <recent name="C:\Repositories\Fathers_Database\Database\src\main\java\com\example\database" />
       <recent name="C:\Repositories\Fathers_Database\Database\src\main\resources\com\example\database" />
+      <recent name="C:\Repositories\Fathers_Database\Database\src\main\java\com\example\database" />
+      <recent name="C:\Repositories\Fathers_Database\Database\src" />
       <recent name="C:\Repositories\Fathers_Database\Database\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -182,7 +201,14 @@
       <workItem from="1679602754010" duration="1403000" />
       <workItem from="1679607484904" duration="827000" />
       <workItem from="1679664359153" duration="138000" />
-      <workItem from="1679771358474" duration="10394000" />
+      <workItem from="1679771358474" duration="20640000" />
+      <workItem from="1679792393133" duration="1346000" />
+      <workItem from="1679793840305" duration="564000" />
+      <workItem from="1679803821312" duration="842000" />
+      <workItem from="1679805030226" duration="1219000" />
+      <workItem from="1679853957190" duration="3770000" />
+      <workItem from="1679859128780" duration="602000" />
+      <workItem from="1679867569127" duration="3523000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -261,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679781399157</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Did some work on mistakes">
+      <created>1679782043657</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679782043657</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

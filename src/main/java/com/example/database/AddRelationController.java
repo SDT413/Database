@@ -78,7 +78,6 @@ public class AddRelationController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            if (!root_tableName.equals(tableName)) {
                 Dialog<String> dialog = new Dialog<>();
                 dialog.setTitle("Вибір зв'язку");
                 dialog.setHeaderText("Виберіть зв'язок");
@@ -107,12 +106,6 @@ public class AddRelationController implements Initializable {
                     return null;
                 });
                 dialog.showAndWait();
-            } else {
-                ObservableList<TableObject> selectedItems = table.getSelectionModel().getSelectedItems();
-                for (TableObject selected : selectedItems) {
-                    selected.relation.setText(RelsName.getText());
-                }
-            }
         });
     }
     public void setTableColumns() throws SQLException {
@@ -126,10 +119,8 @@ public class AddRelationController implements Initializable {
               table.getColumns().add(tableColumn);
          }
          AddRelationColumn();
-         if (!root_tableName.equals(tableName)){
              AddReverseRelationColumn();
              AddCheckColumn();
-         }
     }
     public void AddRelationColumn()  {
         TableColumn<TableObject, String> tableColumn = new TableColumn<>("Зв'язок");
@@ -151,7 +142,8 @@ public class AddRelationController implements Initializable {
             int finalI = i;
             table.getItems().get(i).getCheck().setOnAction(event -> {
                 if (table.getItems().get(finalI).getCheck().isSelected()) {
-                   SetActionForRelationTextField();
+                    table.getItems().get(finalI).getReverse().setText(relationTextFields.get(finalI).getText());
+                    SetActionForRelationTextField();
                     table.getItems().get(finalI).getReverse().setDisable(true);
                 } else {
                     table.getItems().get(finalI).getReverse().setDisable(false);
@@ -174,10 +166,8 @@ public class AddRelationController implements Initializable {
         for (int i = 0; i < data.size(); i++) {
             relationTextFields.add(new TextField());
             data.get(i).setRelation(relationTextFields.get(i));
-            if (!root_tableName.equals(tableName)) {
                 data.get(i).setReverse(new TextField());
                 data.get(i).setCheck(new CheckBox());
-            }
             if (Integer.parseInt(data.get(i).getId()) == rowID && root_tableName.equals(tableName)) {
               Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Помилка");

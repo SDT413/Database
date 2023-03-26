@@ -221,6 +221,10 @@ public class SQL_Connection {
         System.out.println(sb);
         SDUpdate(sb);
     }
+    public void DeleteRow(String tableName, int rowID) throws SQLException {
+        String sb = "DELETE FROM " + tableName + " WHERE id = " + rowID;
+        SDUpdate(sb);
+    }
 public String getJSON_Export(String tableName) throws SQLException {
     StringBuilder sb = new StringBuilder();
     String[] column_names = getColumnNames(tableName);
