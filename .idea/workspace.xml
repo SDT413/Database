@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Some more correction">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ColumnRedactorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/ColumnRedactorWindow.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Redactor.css" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Redactor Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAskWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/TabResaultPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElems.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElems.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElemsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElemsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelation.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/MainWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Relations.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Relations.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,7 +200,10 @@
       <workItem from="1679805030226" duration="1219000" />
       <workItem from="1679853957190" duration="3770000" />
       <workItem from="1679859128780" duration="602000" />
-      <workItem from="1679867569127" duration="12743000" />
+      <workItem from="1679867569127" duration="12758000" />
+      <workItem from="1679880460843" duration="3739000" />
+      <workItem from="1679923490959" duration="2661000" />
+      <workItem from="1679952851216" duration="628000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -296,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679871136395</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Redactor Added">
+      <created>1679880385460</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1679880385460</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,6 +358,7 @@
     <MESSAGE value="Added 2 more buttons" />
     <MESSAGE value="Did some work on mistakes" />
     <MESSAGE value="Some more correction" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some more correction" />
+    <MESSAGE value="Redactor Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redactor Added" />
   </component>
 </project>

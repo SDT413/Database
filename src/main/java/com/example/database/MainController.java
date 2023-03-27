@@ -19,7 +19,7 @@ import java.util.*;
 
 
 public class MainController implements Initializable {
-   static SQL_Connection sql = new SQL_Connection();
+    static SQL_Connection sql = new SQL_Connection();
     @FXML
     private TabPane tabPane;
     @FXML
@@ -202,17 +202,10 @@ public class MainController implements Initializable {
     }
 
     public void start() throws Exception {
-       ResultSet tables = sql.SDQuery("SELECT name FROM sqlite_master WHERE type='table'");
-        while (tables.next()) {
-            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationTable")) {
-                continue;
-            }
-            String tableName = tables.getString(1);
+       ArrayList<String> tables = sql.getUseableTableNames();
+        for (String tableName:tables) {
             InitTable(tableName);
         }
-          tables.close();
-        sql.close();
-        sql.open();
     }
 
     public void AddTable() throws Exception {

@@ -22,9 +22,9 @@ public class ExtendedSearchPanel extends SearchPanel{
             choiceBox[i].getSelectionModel().selectFirst();
             addValueButton[i] = new Button("Додати");
             deleteValueButton[i] = new Button("Видалити");
-            this.add(addValueButton[i], 2, i);
-            this.add(deleteValueButton[i], 3, i);
-            this.add(choiceBox[i], 4, i);
+            this.add(addValueButton[i], 3, i);
+            this.add(deleteValueButton[i], 4, i);
+            this.add(choiceBox[i], 5, i);
         }
     }
     public ChoiceBox<String>[] getChoiceBoxes() {

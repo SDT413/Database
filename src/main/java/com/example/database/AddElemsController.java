@@ -27,7 +27,7 @@ public class AddElemsController implements Initializable {
     @FXML
     private AnchorPane paneforsplit;
     @FXML
-    private Button addSelected;
+    private Button addSelected, newElementButton;
     SQL_Connection sql = MainController.sql;
     ObservableList<TableObject> data = FXCollections.observableArrayList();
     public AddElemsController(String tableName) {
@@ -40,6 +40,7 @@ public class AddElemsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             start();
+            newElementButton.setOnAction(event -> CreateNewElement());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -111,6 +112,14 @@ public void SetActionForAddButtons() {
                 throwables.printStackTrace();
             }
         });
+    }
+    public void CreateNewElement() {
+        try {
+            sql.InsertRow(tableName,splitPanel.getSearchPanel().getColumnsNames(), splitPanel.getSearchPanel().getData());
+            doSearch(splitPanel);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
     public ObservableList<TableObject> getSelectedData() throws SQLException {
         ObservableList<TableObject> selectedData = FXCollections.observableArrayList();

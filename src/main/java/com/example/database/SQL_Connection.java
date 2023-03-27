@@ -1,9 +1,5 @@
 package com.example.database;
 
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +12,7 @@ public class SQL_Connection {
     private ResultSet resultSet;
     public SQL_Connection() {
         try {
-            // Load the JDBC driver.
             Class.forName("org.sqlite.JDBC");
-            // Connect to the database.
             connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
             CreateRelationTable();
         } catch (ClassNotFoundException | SQLException e) {
@@ -138,19 +132,16 @@ public class SQL_Connection {
         }
         return result;
     }
-    public String[] getUseableTableNames() throws SQLException {
-        ArrayList<String> tables = new ArrayList<>();
-        ResultSet TablesSet = CreateResultSet("SELECT name FROM sqlite_master WHERE type='table'");
-        while (TablesSet.next()) {
-            if (!TablesSet.getString("name").equals("RelationTable") && !TablesSet.getString("name").equals("RelationsTable") && !TablesSet.getString("name").equals("sqlite_sequence")) {
-                tables.add(TablesSet.getString("name"));
+    public ArrayList<String> getUseableTableNames() throws SQLException {
+        ArrayList<String> tablesArr = new ArrayList<>();
+        ResultSet tables = CreateResultSet("SELECT name FROM sqlite_master WHERE type='table'");
+        while (tables.next()) {
+            if (tables.getString(1).equals("sqlite_sequence") || tables.getString(1).equals("RelationTable") || tables.getString(1).equals("SuggestionTable") || tables.getString(1).equals("ReservedTable")) {
+                continue;
             }
+            tablesArr.add(tables.getString("name"));
         }
-        String[] result = new String[tables.size()];
-        for (int i = 0; i < tables.size(); i++) {
-            result[i] = tables.get(i);
-        }
-        return result;
+        return tablesArr;
     }
     public String[] SeparateJSONColumnToArray(String tableName,  String column, int rowID) throws SQLException {
         ResultSet resaultSet = CreateResultSet("SELECT "+ column +" FROM " + tableName + " WHERE id = " + rowID);
@@ -222,6 +213,17 @@ public class SQL_Connection {
         SDUpdate(sb);
     }
     public void DeleteRow(String tableName, int rowID) throws SQLException {
+        ArrayList<RelationRow> relations, backRelations;
+        relations = getRelations(tableName, rowID);
+        for (int i = 0; i < relations.size(); i++) {
+            DeleteRelation(tableName, rowID, relations.get(i));
+            backRelations = getRelations(relations.get(i).getTableName(), relations.get(i).getId());
+            for (int j = 0; j < backRelations.size(); j++) {
+                if (backRelations.get(j).getTableName().equals(tableName) && backRelations.get(j).getId() == rowID) {
+                    DeleteRelation(relations.get(i).getTableName(), relations.get(i).getId(), backRelations.get(j));
+                }
+            }
+        }
         String sb = "DELETE FROM " + tableName + " WHERE id = " + rowID;
         SDUpdate(sb);
     }
@@ -322,6 +324,15 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
             "Relation = '" + relationRow.getRelation() + "'";
     System.out.println(query);
     SDUpdate(query);
+    }
+    public ArrayList<RelationRow> getRelations(String tableName, int rowID) throws SQLException {
+        String query = "SELECT * FROM RelationTable WHERE TableName = '" + tableName + "' AND id = '" + rowID + "'";
+        ResultSet rs = SDQuery(query);
+        ArrayList<RelationRow> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(new RelationRow(rs.getString("RTableName"), rs.getInt("Rid"), rs.getString("Relation")));
+        }
+        return list;
     }
     public void InsertRow(String tableName, String[] columnsNames, String[] data) throws SQLException {
         int count = 0;

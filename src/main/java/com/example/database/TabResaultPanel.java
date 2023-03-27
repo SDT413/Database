@@ -6,6 +6,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+import java.util.ArrayList;
+
 public class TabResaultPanel extends TabPane{
     private String[] tableNames;
     private Tab[] tabs;
@@ -15,8 +17,8 @@ public class TabResaultPanel extends TabPane{
     private Button[] updateButton;
     private Button[] SaveButton;
     private Button[] ResetButton;
-    public TabResaultPanel(String[] tableNames) {
-        this.tableNames = tableNames;
+    public TabResaultPanel(ArrayList<String> TableNames) {
+        this.tableNames = TableNames.toArray(new String[0]);
         tableViews = new TableView[tableNames.length];
         tabs = new Tab[tableNames.length];
         gridPanes = new GridPane[tableNames.length];

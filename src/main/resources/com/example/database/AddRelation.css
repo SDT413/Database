@@ -67,3 +67,7 @@
     -fx-font-family: "Arial";
     -fx-padding: 5px;
 }
+.table-row-cell:selected {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+}

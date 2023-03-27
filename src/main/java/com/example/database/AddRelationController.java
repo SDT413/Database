@@ -130,7 +130,7 @@ public class AddRelationController implements Initializable {
               tableColumn.setCellValueFactory(cellData -> cellData.getValue().getProperty(Arrays.asList(columns).indexOf(column)));
               table.getColumns().add(tableColumn);
          }
-         AddRelationColumn();
+            AddRelationColumn();
              AddReverseRelationColumn();
              AddCheckColumn();
     }
@@ -192,9 +192,7 @@ public class AddRelationController implements Initializable {
             currentTableData.add(data.get(i));
         }
         table.setItems(currentTableData);
-        if (!root_tableName.equals(tableName)) {
             setActionForCheckBoxes();
-        }
     }
     public void setActionForAddButton() {
         add.setOnAction(event -> {
