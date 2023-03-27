@@ -34,6 +34,8 @@ public class MainController implements Initializable {
     private Button addRowButton;
     @FXML
     private Button deleteRowButton;
+    @FXML
+    private Button ChangeButton;
     private static final ArrayList<SplitPanel> splitPanels = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -141,8 +143,22 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         stage.setOnCloseRequest(event -> {
             try {
-                sql.close();
-                sql.open();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Сохранити зміни?");
+                alert.setHeaderText("Ви впевнені, що хочете закрити вікно?");
+                alert.setContentText("Якщо ви закриєте вікно, то всі зміни будуть втрачені");
+                ButtonType buttonTypeOne = new ButtonType("Зберегти");
+                ButtonType buttonTypeTwo = new ButtonType("Не зберігати");
+                ButtonType buttonTypeCancel = new ButtonType("Відмінити", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeOne){
+                    relationsController.SaveAll();
+                } else if (result.get() == buttonTypeTwo) {
+                   sql.Reload();
+                } else {
+                    event.consume();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -205,6 +221,29 @@ public class MainController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Сохранити зміни?");
+                alert.setHeaderText("Ви впевнені, що хочете закрити вікно?");
+                alert.setContentText("Якщо ви закриєте вікно, то всі зміни будуть втрачені");
+                ButtonType buttonTypeOne = new ButtonType("Зберегти");
+                ButtonType buttonTypeTwo = new ButtonType("Не зберігати");
+                ButtonType buttonTypeCancel = new ButtonType("Відмінити", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeOne){
+                    AddTableController controller =  fxmlLoader.getController();
+                    controller.Save();
+                } else if (result.get() == buttonTypeTwo) {
+                    sql.Reload();
+                } else {
+                    event.consume();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         stage.showAndWait();
         ReloadMainPanel(SelectedTab);
     }
@@ -298,6 +337,42 @@ public class MainController implements Initializable {
         TableObject tableObject = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getSelectionModel().getSelectedItem();
         sql.DeleteRow(tableName, Integer.parseInt(tableObject.getId()));
         splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getItems().remove(tableObject);
+    }
+    public void Change() throws Exception {
+        int SelectedTab = tabPane.getSelectionModel().getSelectedIndex();
+        FXMLLoader fxmlLoader =  new FXMLLoader(MainApplication.class.getResource("ColumnRedactorWindow.fxml"));
+        String[] columns = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getSearchPanel().getColumnsNames();
+        int rowCount = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getItems().size();
+        int columnCount = splitPanels.get(tabPane.getSelectionModel().getSelectedIndex()).getResaultPanel().getTable().getColumns().size();
+        ColumnRedactorController controller = new ColumnRedactorController(tabPane.getSelectionModel().getSelectedItem().getText(), columns, rowCount, columnCount);
+        fxmlLoader.setController(controller);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Сохранити зміни?");
+                alert.setHeaderText("Ви впевнені, що хочете закрити вікно?");
+                alert.setContentText("Якщо ви закриєте вікно, то всі зміни будуть втрачені");
+                ButtonType buttonTypeOne = new ButtonType("Зберегти");
+                ButtonType buttonTypeTwo = new ButtonType("Не зберігати");
+                ButtonType buttonTypeCancel = new ButtonType("Відмінити", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeOne){
+                    controller.Save();
+                } else if (result.get() == buttonTypeTwo) {
+                    sql.Reload();
+                } else {
+                    event.consume();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        stage.showAndWait();
+        ReloadMainPanel(SelectedTab);
     }
 
 

@@ -1,8 +1,14 @@
 package com.example.database;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,8 +30,21 @@ public class MainApplication extends Application {
         stage.setTitle("Особиста база даних");
         stage.setResizable(true);
         stage.setOnCloseRequest(event -> {
-            System.exit(0);
-        });
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ви впевнені, що хочете вийти?", ButtonType.YES, ButtonType.NO);
+            alert.setTitle("Вихід");
+            alert.setHeaderText("Вихід");
+            Button noButton = (Button) alert.getDialogPane().lookupButton(ButtonType.NO);
+            noButton.setText("Ні");
+            Button yesButton = (Button) alert.getDialogPane().lookupButton(ButtonType.YES);
+            yesButton.setText("Так");
+            alert.showAndWait();
+                   if (alert.getResult() == ButtonType.NO) {
+                       event.consume();
+                     }
+                    else if (alert.getResult() == ButtonType.YES){
+                       System.exit(0);
+                   }
+                    });
         stage.show();
     }
 

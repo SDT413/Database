@@ -8,7 +8,8 @@
     -fx-font-size: 18px;
     -fx-font-family: "Arial";
     -fx-padding: 5px;
-    -fx-pref-width: 200px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 30px;
 }
 .button {
     -fx-background-color: #ffffff;
@@ -29,6 +30,42 @@
 .button:pressed {
     -fx-background-color: #000000;
     -fx-text-fill: #ffffff;
+}
+#addColumnButton:hover {
+    -fx-background-color: green;
+}
+#addColumnButton:pressed {
+    -fx-background-color: green;
+}
+#deleteColumnButton:hover {
+    -fx-background-color: red;
+}
+#deleteColumnButton:pressed {
+    -fx-background-color: red;
+}
+#addRowButton:hover {
+    -fx-background-color: green;
+}
+#addRowButton:pressed {
+    -fx-background-color: green;
+}
+#deleteRowButton:hover {
+    -fx-background-color: red;
+}
+#deleteRowButton:pressed {
+    -fx-background-color: red;
+}
+#addTableButton:hover {
+    -fx-background-color: green;
+}
+#addTableButton:pressed {
+    -fx-background-color: green;
+}
+#deleteTableButton:hover {
+    -fx-background-color: red;
+}
+#deleteTableButton:pressed {
+    -fx-background-color: red;
 }
 .label {
     -fx-text-fill: #000000;
@@ -97,5 +134,4 @@
 .table-row-cell {
     -fx-font-size: 18px;
     -fx-font-family: "Arial";
-
 }

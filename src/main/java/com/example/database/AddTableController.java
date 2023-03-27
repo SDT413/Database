@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.skin.TableColumnHeader;
@@ -53,8 +50,10 @@ public class AddTableController implements Initializable {
         table.getColumns().add(column);
         columnName.setText("");
         table.setOnMouseClicked(event -> {
-            if (event.getTarget() instanceof TableColumnHeader) {
-                columnName.setText(((TableColumnHeader) event.getTarget()).getTableColumn().getText());
+            if (event.getClickCount() == 2) {
+                if (event.getTarget() instanceof TableColumnHeader) {
+                    columnName.setText(((TableColumnHeader) event.getTarget()).getTableColumn().getText());
+                }
             }
         });
     }
@@ -74,6 +73,9 @@ public class AddTableController implements Initializable {
         Stage stage = (Stage) save.getScene().getWindow();
         stage.close();
 
+    }
+    public void Save() throws Exception {
+      save.fire();
     }
     public String getTableName() {
         return TableNameField.getText();

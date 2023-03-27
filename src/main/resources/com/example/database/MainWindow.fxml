@@ -4,14 +4,15 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.MainController">
+<AnchorPane prefHeight="712.0" prefWidth="1476.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.database.MainController">
    <children>
       <Button fx:id="addTableButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#AddTable" prefHeight="33.0" prefWidth="173.0" text="Додати елемент" />
-      <Button fx:id="deleteTableButton" layoutX="172.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteTable" prefHeight="33.0" prefWidth="186.0" text="Видалити елемент" />
-      <Button fx:id="addRowButton" layoutX="850.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertRow" prefHeight="33.0" prefWidth="186.0" text="Параметр анкети" />
+      <Button fx:id="deleteTableButton" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteTable" prefHeight="33.0" prefWidth="186.0" text="Видалити елемент" />
+      <Button fx:id="addRowButton" layoutX="174.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertRow" prefHeight="33.0" prefWidth="186.0" text="Параметр анкети" />
       <Button fx:id="addColumnButton" layoutX="358.0" layoutY="2.0" mnemonicParsing="false" onAction="#InsertColumn" prefHeight="33.0" prefWidth="242.0" text="Добавити анкету елементу" />
       <TabPane fx:id="tabPane" layoutY="33.0" prefHeight="694.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
-      <Button fx:id="deleteColumnButton" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="33.0" prefWidth="250.0" text="Видалити анкету елементу" />
+      <Button fx:id="deleteColumnButton" layoutX="786.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteColumn" prefHeight="33.0" prefWidth="250.0" text="Видалити анкету елементу" />
       <Button fx:id="deleteRowButton" layoutX="1036.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteRow" prefHeight="33.0" prefWidth="242.0" text="Видалити параметр анкети" />
+      <Button fx:id="changeButton" layoutX="1278.0" layoutY="2.0" mnemonicParsing="false" onAction="#Change" prefHeight="33.0" prefWidth="219.0" text="Редектування елементу" />
    </children>
 </AnchorPane>

@@ -3,9 +3,6 @@ package com.example.database;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 
 public class ExtendedSearchPanel extends SearchPanel{
     Button[] addValueButton;

@@ -77,4 +77,12 @@ public class SearchPanel extends GridPane{
             textFields[i].setText("");
         }
     }
+
+    public String[] getColumnsTypes() {
+        String[] columnsTypes = new String[labels.length];
+        for (int i = 0; i < labels.length; i++) {
+            columnsTypes[i] = labels[i].getId();
+        }
+        return columnsTypes;
+    }
 }

@@ -31,6 +31,9 @@
     -fx-background-color: #000000;
     -fx-text-fill: #ffffff;
 }
+#de {
+    -fx-background-color: red;
+}
 .label {
     -fx-text-fill: #000000;
     -fx-font-size: 18px;
@@ -127,5 +130,4 @@
     -fx-pref-width: 400px;
     -fx-pref-height: 30px;
 }
-
 

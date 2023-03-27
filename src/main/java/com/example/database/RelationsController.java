@@ -195,13 +195,33 @@ public class RelationsController implements Initializable {
             tabResaultPanel.getAddReltionButtons()[i].setOnAction(e -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("AddRelationWindow.fxml"));
-                    loader.setController(new AddRelationController(tableName,tabResaultPanel.getTableNames()[finalI],rowId));
+                    AddRelationController controller = new AddRelationController(tableName,tabResaultPanel.getTableNames()[finalI],rowId);
+                    loader.setController(controller);
                     Scene scene = new Scene(loader.load());
                     Stage stage = new Stage();
                     stage.setOnCloseRequest(event -> {
                         try {
-                            sql.close();
-                            sql.open();
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Сохранити зміни?");
+                            alert.setHeaderText("Ви впевнені, що хочете закрити вікно?");
+                            alert.setContentText("Якщо ви закриєте вікно, то всі зміни будуть втрачені");
+                            ButtonType buttonTypeOne = new ButtonType("Зберегти");
+                            ButtonType buttonTypeTwo = new ButtonType("Не зберігати");
+                            ButtonType buttonTypeCancel = new ButtonType("Відмінити", ButtonBar.ButtonData.CANCEL_CLOSE);
+                            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == buttonTypeOne){
+                              if (controller.Save()) {
+                                    sql.Reload();
+                                }
+                              else {
+                                    event.consume();
+                                }
+                            } else if (result.get() == buttonTypeTwo) {
+                                sql.Reload();
+                            } else {
+                                event.consume();
+                            }
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
@@ -298,8 +318,22 @@ public void SetActionForResetButtons(){
         Stage stage = new Stage();
         stage.setOnCloseRequest(event -> {
             try {
-                sql.close();
-                sql.open();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Сохранити зміни?");
+                alert.setHeaderText("Ви впевнені, що хочете закрити вікно?");
+                alert.setContentText("Якщо ви закриєте вікно, то всі зміни будуть втрачені");
+                ButtonType buttonTypeOne = new ButtonType("Зберегти");
+                ButtonType buttonTypeTwo = new ButtonType("Не зберігати");
+                ButtonType buttonTypeCancel = new ButtonType("Відмінити", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeOne){
+                    relationsController.SaveAll();
+                } else if (result.get() == buttonTypeTwo) {
+                    sql.Reload();
+                } else {
+                    event.consume();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -308,5 +342,10 @@ public void SetActionForResetButtons(){
         stage.showAndWait();
     }
 
+    public void SaveAll() {
+        for (int i = 0; i < tabResaultPanel.getSaveButtons().length; i++) {
+            tabResaultPanel.getSaveButtons()[i].fire();
+        }
+    }
 }
 

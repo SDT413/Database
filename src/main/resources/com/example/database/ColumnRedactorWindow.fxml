@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="380.0" prefWidth="733.0" stylesheets="@Redactor.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="add" layoutY="123.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="163.0" text="Додати колонку">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="delete" layoutX="163.0" layoutY="123.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="175.0" text="Видалити колонку">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="columnNameLabel" layoutX="338.0" layoutY="123.0" prefHeight="39.0" prefWidth="163.0" text="Названня колонки:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="columnName" layoutX="501.0" layoutY="123.0" prefHeight="39.0" prefWidth="233.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="table" editable="true" layoutY="162.0" prefHeight="218.0" prefWidth="734.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="162.0" />
+      <Label fx:id="tableNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="86.0" prefWidth="794.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="elemsLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="84.0" prefHeight="39.0" prefWidth="794.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="save" layoutX="734.0" layoutY="123.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="114.0" text="Сохранити">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

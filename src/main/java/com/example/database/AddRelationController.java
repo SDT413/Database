@@ -44,6 +44,18 @@ public class AddRelationController implements Initializable {
         this.tableName = tableName;
         this.rowID = rowID;
     }
+
+    public boolean Save() {
+       finish.fire();
+       ObservableList<TableObject> items = table.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).relation.getText().equals("") || items.get(i).relation.getText().equals(" ")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();

@@ -419,4 +419,30 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         String query = "SELECT info FROM " + tableName + " WHERE id = " + rowId;
             return SDQuery(query).getString("info");
     }
+
+    public void Reload() throws SQLException {
+     close();
+     open();
+    }
+
+    public void AlterTable(String tableName, String[] columnNames) {
+        StringBuilder query = new StringBuilder("Begin Transaction; " +
+                "ALTER TABLE " + tableName + " RENAME TO " + tableName + "_old; " + "CREATE TABLE " + tableName + " (id INTEGER PRIMARY KEY AUTOINCREMENT ");
+        for (int i = 0; i < columnNames.length; i++) {
+            query.append(", ").append(columnNames[i]).append(" varchar(255)");
+        }
+        query.append(", info TEXT); " + "INSERT INTO ").append(tableName).append(" SELECT id");
+        for (int i = 0; i < columnNames.length; i++) {
+            query.append(", ").append(columnNames[i]);
+        }
+        query.append(", info FROM ").append(tableName).append("_old; ").append("DROP TABLE ").append(tableName).append("_old; ").append("Commit;");
+        System.out.println(query);
+        try {
+            SDUpdate(query.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }
