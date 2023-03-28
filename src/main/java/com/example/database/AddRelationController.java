@@ -173,13 +173,18 @@ public class AddRelationController implements Initializable {
             });
         }
     }
-    public void AddTableRows(ObservableList<TableObject> data) {
+    public void AddTableRows(ObservableList<TableObject> data) throws SQLException {
         ObservableList<TableObject> currentTableData = table.getItems();
         for (int i = 0; i < data.size(); i++) {
-            relationTextFields.add(new TextField());
+            TextField relationTextField = new TextField();
+            TextField reverseTextField = new TextField();
+            CheckBox checkBox = new CheckBox();
+            relationTextFields.add(relationTextField);
             data.get(i).setRelation(relationTextFields.get(i));
-                data.get(i).setReverse(new TextField());
-                data.get(i).setCheck(new CheckBox());
+                data.get(i).setReverse(reverseTextField);
+                data.get(i).setCheck(checkBox);
+            AutoTextField.BindAnotherRelationTextField(relationTextFields.get(i), tableName);
+            AutoTextField.BindAnotherRelationTextField(reverseTextField, tableName);
             if (Integer.parseInt(data.get(i).getId()) == rowID && root_tableName.equals(tableName)) {
               Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Помилка");
@@ -213,7 +218,7 @@ public class AddRelationController implements Initializable {
                 stage.setScene(scene);
                 stage.showAndWait();
                 AddTableRows(addElemsController.data);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         });

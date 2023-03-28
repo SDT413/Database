@@ -1,3 +1,6 @@
+.root {
+    -fx-font-size: 18px;
+}
 .text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #000000;

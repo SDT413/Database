@@ -5,6 +5,7 @@
     flex-direction : column;
     align-items : center;
     justify-content : center;
+    -fx-font-size: 18px;
 }
 .table-view {
     -fx-background-color: rgba(11, 255, 226, 0.3);

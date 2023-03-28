@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class RelationsController implements Initializable {
         extendedSearchPanel = new ExtendedSearchPanel(splitPanel.getSearchPanel().getLabels(),getChoicesContent());
         tabResaultPanel  = new TabResaultPanel(sql.getUseableTableNames());
         mainSplitPanel = new SplitPanel(extendedSearchPanel, tabResaultPanel);
+        AutoTextField.BindAnotherTextFields(mainSplitPanel.getSearchPanel().getTextFields(), tableName, mainSplitPanel.getSearchPanel().getColumnsNames());
         SetTablesColumns();
         SetTablesContent();
         mainTab.setContent(mainSplitPanel);
@@ -76,7 +78,16 @@ public class RelationsController implements Initializable {
         SetActionForDeleteRelationButton();
         SetActionForSaveButtons();
         SetActionForResetButtons();
+        SetTextFieldsBinds();
     }
+    private void SetTextFieldsBinds() throws SQLException {
+        for (int i = 0; i < tabResaultPanel.getTables().length; i++) {
+            String tableName = tabResaultPanel.getTableNames()[i];
+            for (int j = 0; j < tabResaultPanel.getTables()[i].getItems().size(); j++)
+                AutoTextField.BindAnotherRelationTextField(tabResaultPanel.getTables()[i].getItems().get(j).getRelation(), tableName);
+        }
+    }
+
     private void SetInfoTab() throws SQLException {
       infoArea.setText(sql.getInfo(tableName, rowId));
         infoSaveButton.setOnAction(actionEvent -> {

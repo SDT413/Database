@@ -10,6 +10,7 @@ public class SQL_Connection {
     private String query;
     private Statement statement;
     private ResultSet resultSet;
+
     public SQL_Connection() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -20,11 +21,13 @@ public class SQL_Connection {
         }
 
     }
+
     public void CreateRelationTable() throws SQLException {
         if (!Arrays.asList(getTableNames()).contains("RelationTable")) {
             SDUpdate("CREATE TABLE RelationTable (id INTEGER, TableName varchar(255), Rid INTEGER, RTableName varchar(255), Relation varchar(255)");
         }
     }
+
     public String getQuery() {
         return query;
     }
@@ -37,33 +40,41 @@ public class SQL_Connection {
         statement = connection.createStatement();
         resultSet = statement.executeQuery(query);
     }
+
     public ResultSet SDQuery(String query) throws SQLException {
         this.query = query;
         statement = connection.createStatement();
         resultSet = statement.executeQuery(query);
         return resultSet;
     }
+
     public void DoUpdate() throws SQLException {
         statement = connection.createStatement();
         statement.executeUpdate(query);
     }
+
     public void SDUpdate(String query) throws SQLException {
         this.query = query;
         statement = connection.createStatement();
         statement.executeUpdate(query);
     }
+
     public ResultSet getResultSet() {
         return resultSet;
     }
+
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
+
     public ResultSet CreateResultSet(String query) throws SQLException {
         return connection.createStatement().executeQuery(query);
     }
+
     public PreparedStatement CreatePreparedStatement(String query) throws SQLException {
         return connection.prepareStatement(query);
     }
+
     public String[] getColumnNames(String tableName) throws SQLException {
         ResultSet rs = SDQuery("SELECT * FROM " + tableName);
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -74,6 +85,7 @@ public class SQL_Connection {
         }
         return columnNames;
     }
+
     public String[] getColumnsTypes(String tableName) throws SQLException {
         ResultSet rs = SDQuery("SELECT * FROM " + tableName);
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -84,6 +96,7 @@ public class SQL_Connection {
         }
         return columnTypes;
     }
+
     public String[] getUseableColumnsNames(String tableName) throws SQLException {
         String[] columnNames = getColumnNames(tableName);
         ArrayList<String> useableColumnsNames = new ArrayList<>();
@@ -98,6 +111,7 @@ public class SQL_Connection {
         }
         return result;
     }
+
     public String[] getUseableColumnsTypes(String tableName) throws SQLException {
         ResultSet rs = SDQuery(getUseableQuery(tableName));
         ResultSetMetaData rsmd = rs.getMetaData();
@@ -108,6 +122,7 @@ public class SQL_Connection {
         }
         return columnTypes;
     }
+
     public String getUseableQuery(String tableName) throws SQLException {
         String[] columnNames = getUseableColumnsNames(tableName);
         StringBuilder query = new StringBuilder("SELECT ");
@@ -120,6 +135,7 @@ public class SQL_Connection {
         query.append(" FROM ").append(tableName);
         return query.toString();
     }
+
     public String[] getTableNames() throws SQLException {
         ArrayList<String> tables = new ArrayList<>();
         ResultSet TablesSet = CreateResultSet("SELECT name FROM sqlite_master WHERE type='table'");
@@ -132,6 +148,7 @@ public class SQL_Connection {
         }
         return result;
     }
+
     public ArrayList<String> getUseableTableNames() throws SQLException {
         ArrayList<String> tablesArr = new ArrayList<>();
         ResultSet tables = CreateResultSet("SELECT name FROM sqlite_master WHERE type='table'");
@@ -143,14 +160,14 @@ public class SQL_Connection {
         }
         return tablesArr;
     }
-    public String[] SeparateJSONColumnToArray(String tableName,  String column, int rowID) throws SQLException {
-        ResultSet resaultSet = CreateResultSet("SELECT "+ column +" FROM " + tableName + " WHERE id = " + rowID);
+
+    public String[] SeparateJSONColumnToArray(String tableName, String column, int rowID) throws SQLException {
+        ResultSet resaultSet = CreateResultSet("SELECT " + column + " FROM " + tableName + " WHERE id = " + rowID);
         ArrayList<String> data = new ArrayList<>();
         while (resaultSet.next()) {
-          if (Objects.isNull(resaultSet.getString(column))) {
+            if (Objects.isNull(resaultSet.getString(column))) {
                 return new String[]{"Немає даних"};
-            }
-            else {
+            } else {
                 String[] temp = resaultSet.getString(column).split(",");
                 for (int i = 0; i < temp.length; i++) {
                     if (temp[i].startsWith("[")) {
@@ -172,9 +189,10 @@ public class SQL_Connection {
         }
         return result;
     }
+
     public String[] getDataByID(int id, String tableName) throws SQLException {
-       ResultSet resaultSet = CreateResultSet("SELECT * FROM " + tableName + " WHERE id = " + id);
-       int columnsNumber = resaultSet.getMetaData().getColumnCount();
+        ResultSet resaultSet = CreateResultSet("SELECT * FROM " + tableName + " WHERE id = " + id);
+        int columnsNumber = resaultSet.getMetaData().getColumnCount();
         String[] data = new String[columnsNumber];
         while (resaultSet.next()) {
             for (int i = 1; i <= columnsNumber; i++) {
@@ -183,35 +201,40 @@ public class SQL_Connection {
         }
         return data;
     }
+
     public String[] getUseableDataByID(int id, String tableName) throws SQLException {
-       ResultSet rs = CreateResultSet(getUseableQuery(tableName) + " WHERE id = " + id);
-         int columnsNumber = rs.getMetaData().getColumnCount();
-          String[] data = new String[columnsNumber];
-          while (rs.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                 data[i - 1] = rs.getString(i);
-                }
-          }
-          return data;
+        ResultSet rs = CreateResultSet(getUseableQuery(tableName) + " WHERE id = " + id);
+        int columnsNumber = rs.getMetaData().getColumnCount();
+        String[] data = new String[columnsNumber];
+        while (rs.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                data[i - 1] = rs.getString(i);
+            }
+        }
+        return data;
     }
+
     public void RemoveFromJSON(String tableName, String column, int rowID, int indexOfValue) throws SQLException {
         String sb = "UPDATE " + tableName + " SET " + column + " = " +
                 "json_remove(" + column + ", '$[" + indexOfValue + "]')" + " WHERE id = " + rowID;
         System.out.println(sb);
         SDUpdate(sb);
     }
+
     public void AddToJSON(String tableName, String column, int rowID, String value) throws SQLException {
         String sb = "UPDATE " + tableName + " SET " + column + " = " +
                 "json_insert(" + column + ", '$[#]', '" + value + "')" + " WHERE id = " + rowID;
         System.out.println(sb);
         SDUpdate(sb);
     }
+
     public void UpdateJSON(String tableName, String column, int rowID, int indexOfValue, String value) throws SQLException {
         String sb = "UPDATE " + tableName + " SET " + column + " = " +
                 "json_replace(" + column + ", '$[" + indexOfValue + "]', '" + value + "')" + " WHERE id = " + rowID;
         System.out.println(sb);
         SDUpdate(sb);
     }
+
     public void DeleteRow(String tableName, int rowID) throws SQLException {
         ArrayList<RelationRow> relations, backRelations;
         relations = getRelations(tableName, rowID);
@@ -227,26 +250,27 @@ public class SQL_Connection {
         String sb = "DELETE FROM " + tableName + " WHERE id = " + rowID;
         SDUpdate(sb);
     }
-public String getJSON_Export(String tableName) throws SQLException {
-    StringBuilder sb = new StringBuilder();
-    String[] column_names = getColumnNames(tableName);
-    int columnCount = column_names.length;
-    sb.append("SELECT ");
-    sb.append("id").append(", ");
-    for (int i = 1; i < columnCount; i++) {
 
-        if (column_names[i].equals("info")) {
-            sb.append("'info'").append(", ");
+    public String getJSON_Export(String tableName) throws SQLException {
+        StringBuilder sb = new StringBuilder();
+        String[] column_names = getColumnNames(tableName);
+        int columnCount = column_names.length;
+        sb.append("SELECT ");
+        sb.append("id").append(", ");
+        for (int i = 1; i < columnCount; i++) {
+
+            if (column_names[i].equals("info")) {
+                sb.append("'info'").append(", ");
+            } else {
+                sb.append("json_extract(").append(column_names[i]).append(", '$[0]')").append(", ");
+            }
         }
-        else {
-            sb.append("json_extract(").append(column_names[i]).append(", '$[0]')").append(", ");
-        }
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append(" FROM ").append(tableName);
+        sb.append(" WHERE ");
+        return sb.toString();
     }
-    sb.delete(sb.length() - 2, sb.length());
-    sb.append(" FROM ").append(tableName);
-    sb.append(" WHERE ");
-    return sb.toString();
-}
+
     public ResultSet Search(String tableName, String[] columnNames, String[] text) throws SQLException {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> listText = new ArrayList<>();
@@ -257,7 +281,7 @@ public String getJSON_Export(String tableName) throws SQLException {
                 listColumns.add(columnNames[i]);
             }
         }
-    if (listText.size() == 0) {
+        if (listText.size() == 0) {
             System.out.println(getJSON_Export(tableName).replace("WHERE", ""));
             return SDQuery(getJSON_Export(tableName).replace("WHERE", ""));
         }
@@ -275,9 +299,11 @@ public String getJSON_Export(String tableName) throws SQLException {
         System.out.println(getJSON_Export(tableName) + sb.toString());
         return SDQuery(getJSON_Export(tableName) + sb.toString());
     }
+
     public void close() throws SQLException {
         connection.close();
     }
+
     public void open() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite:identifier.sqlite");
     }
@@ -296,6 +322,7 @@ public String getJSON_Export(String tableName) throws SQLException {
         SDUpdate(sb.toString());
         System.out.println(sb.toString());
     }
+
     public void DropTable(String Table_Name) throws SQLException {
         SDUpdate("DROP TABLE IF EXISTS " + Table_Name);
     }
@@ -303,28 +330,34 @@ public String getJSON_Export(String tableName) throws SQLException {
     public void AddColumn(String tableName, String columnName) throws SQLException {
         SDUpdate("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " varchar(255)");
     }
+
     public void RemoveColumn(String tableName, String columnName) throws SQLException {
         SDUpdate("ALTER TABLE " + tableName + " DROP COLUMN " + columnName);
     }
+
     public void RenameColumn(String tableName, String oldColumnName, String newColumnName) throws SQLException {
         SDUpdate("ALTER TABLE " + tableName + " RENAME COLUMN " + oldColumnName + " TO " + newColumnName);
     }
+
     public void RenameTable(String oldTableName, String newTableName) throws SQLException {
         SDUpdate("ALTER TABLE " + oldTableName + " RENAME TO " + newTableName);
     }
+
     public void RemoveRow(String tableName, int rowID) throws SQLException {
         SDUpdate("DELETE FROM " + tableName + " WHERE id = " + rowID);
     }
-public void DeleteRelation(String tableName, int rowID, RelationRow relationRow) throws SQLException {
-    String query = "DELETE FROM RelationTable WHERE " +
-            "id = '" + rowID + "' AND " +
-            "TableName = '" + tableName + "' AND " +
-            "Rid = '" + relationRow.getId() + "' AND " +
-            "RTableName = '" + relationRow.getTableName() + "' AND " +
-            "Relation = '" + relationRow.getRelation() + "'";
-    System.out.println(query);
-    SDUpdate(query);
+
+    public void DeleteRelation(String tableName, int rowID, RelationRow relationRow) throws SQLException {
+        String query = "DELETE FROM RelationTable WHERE " +
+                "id = '" + rowID + "' AND " +
+                "TableName = '" + tableName + "' AND " +
+                "Rid = '" + relationRow.getId() + "' AND " +
+                "RTableName = '" + relationRow.getTableName() + "' AND " +
+                "Relation = '" + relationRow.getRelation() + "'";
+        System.out.println(query);
+        SDUpdate(query);
     }
+
     public ArrayList<RelationRow> getRelations(String tableName, int rowID) throws SQLException {
         String query = "SELECT * FROM RelationTable WHERE TableName = '" + tableName + "' AND id = '" + rowID + "'";
         ResultSet rs = SDQuery(query);
@@ -334,6 +367,7 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         }
         return list;
     }
+
     public void InsertRow(String tableName, String[] columnsNames, String[] data) throws SQLException {
         int count = 0;
         if (data.length == 0) {
@@ -372,13 +406,14 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         System.out.println(sb.toString());
         SDUpdate(sb.toString());
     }
+
     /////////////////////////////////////////////////////
     public ArrayList<RelationRow> getDataFromRelationTable(String tableName, int rowId) throws SQLException {
-        ResultSet resultSet = SDQuery("SELECT * FROM RelationTable WHERE TableName = '" + tableName + "'"+ " AND id = " + rowId);
+        ResultSet resultSet = SDQuery("SELECT * FROM RelationTable WHERE TableName = '" + tableName + "'" + " AND id = " + rowId);
         ArrayList<RelationRow> rdata = new ArrayList<>();
         while (resultSet.next()) {
             rdata.add(new RelationRow(resultSet.getString("RTableName"), resultSet.getInt("Rid"), resultSet.getString("Relation")));
-            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName"))+" id = " + resultSet.getInt("Rid"));
+            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName")) + " id = " + resultSet.getInt("Rid"));
             while (rs.next()) {
                 String[] values = new String[rs.getMetaData().getColumnCount() - 1];
                 for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
@@ -389,12 +424,13 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         }
         return rdata;
     }
+
     public ArrayList<RelationRow> getDataFromRelationTableFor(String tableName, String RelatedTableName, int rowId) throws SQLException {
-        ResultSet resultSet = SDQuery("SELECT * FROM RelationTable WHERE TableName = '" + tableName + "'"+ " AND id = " + rowId + " AND RTableName = '" + RelatedTableName + "'");
+        ResultSet resultSet = SDQuery("SELECT * FROM RelationTable WHERE TableName = '" + tableName + "'" + " AND id = " + rowId + " AND RTableName = '" + RelatedTableName + "'");
         ArrayList<RelationRow> rdata = new ArrayList<>();
         while (resultSet.next()) {
             rdata.add(new RelationRow(resultSet.getString("RTableName"), resultSet.getInt("Rid"), resultSet.getString("Relation")));
-            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName"))+" id = " + resultSet.getInt("Rid"));
+            ResultSet rs = SDQuery(getJSON_Export(resultSet.getString("RTableName")) + " id = " + resultSet.getInt("Rid"));
             while (rs.next()) {
                 String[] values = new String[rs.getMetaData().getColumnCount() - 1];
                 for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
@@ -412,7 +448,7 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
         SDUpdate(query);
     }
 
-    public void UpdateRelation(String tableName, int rowID,RelationRow relationRow) {
+    public void UpdateRelation(String tableName, int rowID, RelationRow relationRow) {
         String query = "UPDATE RelationTable SET TableName = '" + tableName + "', id = " + rowID + ", RTableName = '" + relationRow.getTableName() + "', Rid = " + relationRow.getId() + ", Relation = '" + relationRow.getRelation() + "' WHERE TableName = '" + tableName + "' AND id = " + rowID + " AND RTableName = '" + relationRow.getTableName() + "' AND Rid = " + relationRow.getId();
         try {
             SDUpdate(query);
@@ -428,12 +464,12 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
 
     public String getInfo(String tableName, int rowId) throws SQLException {
         String query = "SELECT info FROM " + tableName + " WHERE id = " + rowId;
-            return SDQuery(query).getString("info");
+        return SDQuery(query).getString("info");
     }
 
     public void Reload() throws SQLException {
-     close();
-     open();
+        close();
+        open();
     }
 
     public void AlterTable(String tableName, String[] columnNames) {
@@ -456,4 +492,33 @@ public void DeleteRelation(String tableName, int rowID, RelationRow relationRow)
 
 
     }
+
+    public String[] getValuesFromColumn(String tableName, String column) throws SQLException {
+        ResultSet resultSet = SDQuery("SELECT  json_each.value FROM " + tableName + ", json_each(" + tableName + "." + column + ")");
+        ArrayList<String> values = new ArrayList<>();
+        while (resultSet.next()) {
+            values.add(resultSet.getString("value"));
+        }
+        return values.toArray(new String[values.size()]);
+    }
+
+    public String[] getValuesFromRelationTable() throws SQLException {
+        ResultSet resultSet = SDQuery("SELECT Relation FROM RelationTable");
+        ArrayList<String> values = new ArrayList<>();
+        while (resultSet.next()) {
+            values.add(resultSet.getString("Relation"));
+        }
+        return values.toArray(new String[values.size()]);
+
+    }
+    public String[] getValuesFromRelationTable(String tableName) throws SQLException {
+        ResultSet resultSet = SDQuery("SELECT Relation FROM RelationTable" + " WHERE TableName = '" + tableName + "'");
+        ArrayList<String> values = new ArrayList<>();
+        while (resultSet.next()) {
+            values.add(resultSet.getString("Relation"));
+        }
+        return values.toArray(new String[values.size()]);
+
+    }
 }
+

@@ -40,6 +40,7 @@ public class AddElemsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             start();
+            AutoTextField.BindAnotherTextFields(splitPanel.getSearchPanel().getTextFields(), tableName, splitPanel.getSearchPanel().getColumnsNames());
             newElementButton.setOnAction(event -> CreateNewElement());
         } catch (SQLException e) {
             throw new RuntimeException(e);

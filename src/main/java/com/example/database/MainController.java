@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
@@ -177,6 +178,7 @@ public class MainController implements Initializable {
 
         SetTableColumns(tableView, tableData);
         SplitPanel splitPanel = new SplitPanel(InitSearchPanel(InitLabels(tableData.getMetaData().getColumnCount(), tableData)), InitResultPanel(tableView, tableName));
+        AutoTextField.BindAnotherTextFields(splitPanel.getSearchPanel().getTextFields(), tableName, splitPanel.getSearchPanel().getColumnsNames());
         SetTableRows(tableView, sql.Search(tableName, splitPanel.getSearchPanel().getColumnsNames(), splitPanel.getSearchPanel().getData()));
         AddChangeListener(splitPanel);
 
@@ -187,6 +189,8 @@ public class MainController implements Initializable {
         tableData.close();
         AddMouseListener(tableView);
     }
+
+
     public SearchPanel InitSearchPanel(Label[] labels) {
         return new SearchPanel(labels);
     }
