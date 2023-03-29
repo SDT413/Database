@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Don't Use this commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AutoTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Suggestion List Added">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Database_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddElemsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/AddRelationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElems.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddElems.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddRelation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAsk.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/AddTableAsk.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Redactor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Redactor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Relations.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Relations.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -54,31 +45,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/sqllite/sqlite-jdbc-3.40.1.0.jar",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15527344",
-    "project.structure.side.proportion": "0.46666667",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/sqllite/sqlite-jdbc-3.40.1.0.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.46666667&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.database" />
@@ -97,6 +88,20 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.database.MainApplication" />
+      <module name="Database" />
+      <option name="VM_PARAMETERS" value="--add-exports javafx.base/com.sun.javafx.event=org.controlsfx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
       <setting name="displayName" value="" />
       <setting name="bbPath" value="" />
@@ -132,20 +137,6 @@
       <setting name="fixLineNumbers" value="false" />
       <setting name="focusEditor" value="false" />
       <method v="2" />
-    </configuration>
-    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.database.MainApplication" />
-      <module name="Database" />
-      <option name="VM_PARAMETERS" value="--add-exports javafx.base/com.sun.javafx.event=org.controlsfx.controls" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.database.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <recent_temporary>
       <list>
@@ -208,7 +199,17 @@
       <workItem from="1680024111821" duration="117000" />
       <workItem from="1680026777943" duration="821000" />
       <workItem from="1680027613800" duration="5330000" />
-      <workItem from="1680037479080" duration="92000" />
+      <workItem from="1680037479080" duration="275000" />
+      <workItem from="1680073295554" duration="68000" />
+      <workItem from="1680080168496" duration="1214000" />
+      <workItem from="1680103020649" duration="177000" />
+      <workItem from="1680103211380" duration="69000" />
+      <workItem from="1680103284683" duration="45000" />
+      <workItem from="1680103339441" duration="55000" />
+      <workItem from="1680103409379" duration="507000" />
+      <workItem from="1680103929815" duration="43000" />
+      <workItem from="1680106496134" duration="83000" />
+      <workItem from="1680108077821" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -315,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679953743373</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Suggestion List Added">
+      <created>1680037619924</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1680037619924</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,6 +380,7 @@
     <MESSAGE value="Some more correction" />
     <MESSAGE value="Redactor Added" />
     <MESSAGE value="Don't Use this commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Don't Use this commit" />
+    <MESSAGE value="Suggestion List Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Suggestion List Added" />
   </component>
 </project>

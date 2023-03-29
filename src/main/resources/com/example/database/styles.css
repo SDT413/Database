@@ -1,0 +1,154 @@
+.root {
+    -fx-font-size: 18px;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-padding: 5px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 30px;
+}
+.button {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-padding: 5px;
+}
+.button:hover {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+.button:pressed {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+}
+
+#addColumnButton:hover {
+    -fx-background-color: green;
+}
+#addColumnButton:pressed {
+    -fx-background-color: green;
+}
+#deleteColumnButton:hover {
+    -fx-background-color: red;
+}
+#deleteColumnButton:pressed {
+    -fx-background-color: red;
+}
+#addRowButton:hover {
+    -fx-background-color: green;
+}
+#addRowButton:pressed {
+    -fx-background-color: green;
+}
+#deleteRowButton:hover {
+    -fx-background-color: red;
+}
+#deleteRowButton:pressed {
+    -fx-background-color: red;
+}
+#addTableButton:hover {
+    -fx-background-color: green;
+}
+#addTableButton:pressed {
+    -fx-background-color: green;
+}
+#deleteTableButton:hover {
+    -fx-background-color: red;
+}
+#deleteTableButton:pressed {
+    -fx-background-color: red;
+}
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+}
+.check-box {
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+}
+.tab-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.tab {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+}
+.tab:hover {
+    -fx-background-color: rgb(154, 154, 154);
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+.tab:pressed {
+    -fx-background-color: rgb(154, 154, 154);
+    -fx-text-fill: #ffffff;
+}
+.tab:selected {
+    -fx-background-color: rgb(154, 154, 154);
+    -fx-opacity: 0.5;
+    -fx-text-fill: #ffffff;
+}
+.tab:selected:hover {
+    -fx-background-color: rgb(154, 154, 154);
+    -fx-text-fill: #ffffff;
+}
+.root {
+    -fx-background-color: rgb(154, 154, 154);
+    -fx-background-radius: 5px;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : center;
+}
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-padding: 5px;
+}
+.table-row-cell {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+}
+.combo-box  {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-padding: 5px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 10px;
+}

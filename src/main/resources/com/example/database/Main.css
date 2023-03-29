@@ -99,21 +99,21 @@
     -fx-font-family: "Arial";
 }
 .tab:hover {
-    -fx-background-color: #000000;
+    -fx-background-color: rgb(154, 154, 154);
     -fx-text-fill: #ffffff;
     -fx-cursor: hand;
 }
 .tab:pressed {
-    -fx-background-color: #000000;
+    -fx-background-color: rgb(154, 154, 154);
     -fx-text-fill: #ffffff;
 }
 .tab:selected {
-    -fx-background-color: #000000;
+    -fx-background-color: rgb(154, 154, 154);
     -fx-opacity: 0.5;
     -fx-text-fill: #ffffff;
 }
 .tab:selected:hover {
-    -fx-background-color: #000000;
+    -fx-background-color: rgb(154, 154, 154);
     -fx-text-fill: #ffffff;
 }
 .root {
