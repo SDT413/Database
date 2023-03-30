@@ -322,12 +322,14 @@ public class SQL_Connection {
                 sb.append(", ");
             }
         }
-        sb.append(")");
+        sb.append(" ,info TEXT)");
         SDUpdate(sb.toString());
         System.out.println(sb.toString());
     }
 
     public void DropTable(String Table_Name) throws SQLException {
+        close();
+        open();
         SDUpdate("DROP TABLE IF EXISTS " + Table_Name);
     }
 
@@ -476,15 +478,24 @@ public class SQL_Connection {
         open();
     }
 
-    public void AlterTable(String tableName, String[] columnNames) {
+    public void AlterTable(String tableName, String[] columnNames, ArrayList<String> newColumnNames) {
         StringBuilder query = new StringBuilder("Begin Transaction; " +
-                "ALTER TABLE " + tableName + " RENAME TO " + tableName + "_old; " + "CREATE TABLE " + tableName + " (id INTEGER PRIMARY KEY AUTOINCREMENT ");
+                "ALTER TABLE " + tableName + " RENAME TO " + tableName + "_old; " + "CREATE TABLE " + tableName + " (id INTEGER PRIMARY KEY AUTOINCREMENT");
         for (int i = 0; i < columnNames.length; i++) {
             query.append(", ").append(columnNames[i]).append(" varchar(255)");
         }
-        query.append(", info TEXT); " + "INSERT INTO ").append(tableName).append(" SELECT id");
+        query.append(", info TEXT); " + "INSERT INTO ").append(tableName).append(" (id");
         for (int i = 0; i < columnNames.length; i++) {
             query.append(", ").append(columnNames[i]);
+        }
+        query.append(", info) SELECT id");
+        for (int i = 0; i < columnNames.length; i++) {
+            if (!newColumnNames.contains(columnNames[i])) {
+                query.append(", ").append(columnNames[i]);
+            }
+            else {
+                query.append(", ").append("''");
+            }
         }
         query.append(", info FROM ").append(tableName).append("_old; ").append("DROP TABLE ").append(tableName).append("_old; ").append("Commit;");
         System.out.println(query);

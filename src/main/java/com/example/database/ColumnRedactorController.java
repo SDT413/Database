@@ -10,6 +10,8 @@ import javafx.scene.control.skin.TableColumnHeader;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ColumnRedactorController implements Initializable {
@@ -29,17 +31,24 @@ public class ColumnRedactorController implements Initializable {
     String[] columnNames;
     int rowCount;
     int columnCount;
+    ArrayList<String> newColumnNames;
 
     public ColumnRedactorController(String tableName, String[] columnNames,  int rowCount, int columnCount) {
         this.tableName = tableName;
         this.columnNames = columnNames;
         this.rowCount = rowCount;
         this.columnCount = columnCount;
+        newColumnNames = new ArrayList<>();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     table.setEditable(true);
+        try {
+            sql.Reload();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        table.setEditable(true);
      table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
      table.setPlaceholder(new javafx.scene.control.Label(""));
      columnName.setPromptText("Назва колонки");
@@ -70,6 +79,7 @@ public class ColumnRedactorController implements Initializable {
   column.setCellFactory(TextFieldTableCell.forTableColumn());
   column.setCellValueFactory(new PropertyValueFactory<>(columnName.getText()));
   table.getColumns().add(column);
+  newColumnNames.add(columnName.getText());
   columnName.setText("");
   table.setOnMouseClicked(event -> {
    if (event.getClickCount() == 2) {
@@ -85,6 +95,7 @@ public class ColumnRedactorController implements Initializable {
   for (TableColumn<TableObject, ?> column : columns) {
    if (column.getText().equals(column_name)) {
     table.getColumns().remove(column);
+    newColumnNames.remove(column_name);
     break;
    }
   }
@@ -101,7 +112,12 @@ public class ColumnRedactorController implements Initializable {
             for (int i = 0; i < table.getColumns().size(); i++) {
                 columnNames[i] = table.getColumns().get(i).getText();
             }
-            sql.AlterTable(tableName, columnNames);
+            for ( String s:
+                   newColumnNames) {
+                System.out.println("new elem:" + s);
+
+            }
+            sql.AlterTable(tableName, columnNames, newColumnNames);
             Stage stage = (Stage) save.getScene().getWindow();
             stage.close();
         }
@@ -112,6 +128,6 @@ public class ColumnRedactorController implements Initializable {
   for (int i = 0; i < table.getColumns().size(); i++) {
    columnNames[i] = table.getColumns().get(i).getText();
   }
-  sql.AlterTable(tableName, columnNames);
+  sql.AlterTable(tableName, columnNames, newColumnNames);
  }
 }
