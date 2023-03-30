@@ -68,3 +68,9 @@
     -fx-font-family: "Arial";
     -fx-padding: 5px;
 }
+#tableNameLabel {
+    -fx-text-fill: #000000;
+    -fx-font-size: 36px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}

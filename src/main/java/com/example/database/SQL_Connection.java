@@ -166,7 +166,7 @@ public class SQL_Connection {
         ArrayList<String> data = new ArrayList<>();
         while (resaultSet.next()) {
             if (Objects.isNull(resaultSet.getString(column))) {
-                return new String[]{"Немає даних"};
+                return new String[]{" "};
             } else {
                 String[] temp = resaultSet.getString(column).split(",");
                 for (int i = 0; i < temp.length; i++) {
@@ -222,6 +222,10 @@ public class SQL_Connection {
     }
 
     public void AddToJSON(String tableName, String column, int rowID, String value) throws SQLException {
+        if (Objects.isNull(SDQuery("SELECT " + column + " FROM " + tableName + " WHERE id = " + rowID).getString(column))) {
+            SDUpdate("UPDATE " + tableName + " SET " + column + " = '[\"" + value + "\"]' WHERE id = " + rowID);
+            return;
+        }
         String sb = "UPDATE " + tableName + " SET " + column + " = " +
                 "json_insert(" + column + ", '$[#]', '" + value + "')" + " WHERE id = " + rowID;
         System.out.println(sb);

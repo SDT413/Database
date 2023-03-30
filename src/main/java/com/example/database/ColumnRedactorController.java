@@ -41,7 +41,7 @@ public class ColumnRedactorController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
      table.setEditable(true);
      table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-     table.setPlaceholder(new javafx.scene.control.Label("Таблиця порожня"));
+     table.setPlaceholder(new javafx.scene.control.Label(""));
      columnName.setPromptText("Назва колонки");
      for (int i = 0; i < columnCount; i++) {
       TableColumn<TableObject, String> column = new TableColumn<>(columnNames[i]);

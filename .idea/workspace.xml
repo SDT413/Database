@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Exe time">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/database/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Database.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Database_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Database_jar.xml" afterDir="false" />
+    <list default="true" id="a7af85fa-2a38-4a60-95f1-e04826453134" name="Changes" comment="Exe complete">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/33a6720e-bb20-4dc6-a7aa-fd8fd08318d5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33a6720e-bb20-4dc6-a7aa-fd8fd08318d5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/identifier.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Database_jar/Database.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Database_jar/Database.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Database_jar/app.exe" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Database_jar/app.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Database_jar/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Database_jar/identifier.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Database_jar/launch4j.log" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Database_jar/launch4j.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ColumnRedactorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ColumnRedactorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/ExtendedSearchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/RelationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/database/SQL_Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/database/Redactor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/database/Redactor.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +66,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15527344",
     "project.structure.side.proportion": "0.46666667",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -210,7 +217,10 @@
       <workItem from="1680103409379" duration="507000" />
       <workItem from="1680103929815" duration="43000" />
       <workItem from="1680106496134" duration="83000" />
-      <workItem from="1680108077821" duration="2720000" />
+      <workItem from="1680108077821" duration="4875000" />
+      <workItem from="1680125271210" duration="27000" />
+      <workItem from="1680125695229" duration="1000" />
+      <workItem from="1680126065781" duration="2351000" />
     </task>
     <task id="LOCAL-00001" summary="Work_Start">
       <created>1678390104867</created>
@@ -331,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680111243909</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Exe complete">
+      <created>1680112217281</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1680112217281</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +360,7 @@
         <entry key="47040d5b-4aad-477e-987c-33ac05e70c1d">
           <value>
             <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -361,7 +379,6 @@
                   </entry>
                 </map>
               </option>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
@@ -390,6 +407,7 @@
     <MESSAGE value="Don't Use this commit" />
     <MESSAGE value="Suggestion List Added" />
     <MESSAGE value="Exe time" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exe time" />
+    <MESSAGE value="Exe complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exe complete" />
   </component>
 </project>

@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
+import java.util.Objects;
+
 public class ExtendedSearchPanel extends SearchPanel{
     Button[] addValueButton;
     Button[] deleteValueButton;

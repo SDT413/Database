@@ -30,13 +30,15 @@ public class MainApplication extends Application {
         stage.setTitle("Особиста база даних");
         stage.setResizable(true);
         stage.setOnCloseRequest(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ви впевнені, що хочете вийти?", ButtonType.YES, ButtonType.NO);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Ви впевнені, що хочете вийти?", ButtonType.YES, ButtonType.NO, ButtonType.APPLY);
             alert.setTitle("Вихід");
             alert.setHeaderText("Вихід");
             Button noButton = (Button) alert.getDialogPane().lookupButton(ButtonType.NO);
             noButton.setText("Ні");
             Button yesButton = (Button) alert.getDialogPane().lookupButton(ButtonType.YES);
             yesButton.setText("Так");
+            Button applyButton = (Button) alert.getDialogPane().lookupButton(ButtonType.APPLY);
+            applyButton.setText("Перезавантажити табличку");
             alert.showAndWait();
                    if (alert.getResult() == ButtonType.NO) {
                        event.consume();
@@ -44,7 +46,17 @@ public class MainApplication extends Application {
                     else if (alert.getResult() == ButtonType.YES){
                        System.exit(0);
                    }
-                    });
+                     else if (alert.getResult() == ButtonType.APPLY){
+                          try {
+                            ((MainController) fxmlLoader.getController()).ReloadMainPanel();
+                            event.consume();
+                          } catch (IOException e) {
+                            e.printStackTrace();
+                          } catch (Exception e) {
+                              throw new RuntimeException(e);
+                          }
+                        }
+                   });
         stage.show();
     }
 

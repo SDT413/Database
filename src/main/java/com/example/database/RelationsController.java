@@ -155,7 +155,7 @@ public class RelationsController implements Initializable {
         int columnCount = splitPanel.getResaultPanel().getColumnCount();
         for (int i = 0; i < columnCount; i++) {
             String[] data = sql.SeparateJSONColumnToArray(tableName, columnsNames[i], rowId);
-            choicesContent[i] = data;
+                choicesContent[i] = data;
         }
         return choicesContent;
     }
@@ -177,12 +177,15 @@ public class RelationsController implements Initializable {
             int finalI = i;
             extendedSearchPanel.getAddValueButtons()[i].setOnAction(e -> {
                 try {
+                    extendedSearchPanel.getChoiceBoxes()[finalI].getItems().add(extendedSearchPanel.getTextFields()[finalI].getText());
+                    extendedSearchPanel.getChoiceBoxes()[finalI].getSelectionModel().selectLast();
+                    if (extendedSearchPanel.getChoiceBoxes()[finalI].getItems().get(0).equals(" ")) {
+                        extendedSearchPanel.choiceBox[finalI].getItems().remove(0);
+                    }
                     sql.AddToJSON(splitPanel.getResaultPanel().getTableName(), splitPanel.getSearchPanel().getColumnsNames()[finalI], rowId, extendedSearchPanel.getTextFields()[finalI].getText());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-                extendedSearchPanel.getChoiceBoxes()[finalI].getItems().add(extendedSearchPanel.getTextFields()[finalI].getText());
-                extendedSearchPanel.getChoiceBoxes()[finalI].getSelectionModel().selectLast();
             });
         }
     }
